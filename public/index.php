@@ -8,4 +8,5 @@ $instance = $container->get('policySdk')->instance("HX");
 $instance->setConfig([
     'url' => '122121'
 ]);
+
 echo $instance->insure([]);
