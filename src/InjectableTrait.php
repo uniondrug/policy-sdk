@@ -12,7 +12,7 @@ namespace Uniondrug\PolicySdk;
  * trait InjectableTrait
  * @property \Uniondrug\PolicySdk\Plugins\Logger $logger
  * @property \Uniondrug\PolicySdk\Plugins\ApiResponse $apiRespons
- * @property \Uniondrug\PolicySdk\Plugins\PolicySDK $policySDK
+ * @property \Uniondrug\PolicySdk\Plugins\PolicySDK $policySdk
  */
 trait InjectableTrait
 {
