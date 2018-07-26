@@ -1,6 +1,6 @@
 <?php
 
-namespace Uniondrug\PolicyService\Plugins;
+namespace Uniondrug\PolicySdk\Plugins;
 
 use Phalcon\Logger\Adapter\File as File;
 use Uniondrug\PolicyService\Container;

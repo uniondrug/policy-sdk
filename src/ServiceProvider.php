@@ -6,11 +6,11 @@
  * Time: 上午12:26
  */
 
-namespace Uniondrug\PolicyService;
+namespace Uniondrug\PolicySdk;
 
 
-use Pails\Plugins\ApiResponse;
-use Uniondrug\PolicyService\Plugins\Logger;
+use Uniondrug\PolicySdk\Plugins\ApiResponse;
+use Uniondrug\PolicySdk\Plugins\Logger;
 
 class ServiceProvider
 {

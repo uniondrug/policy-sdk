@@ -1,8 +1,8 @@
 <?php
-namespace Uniondrug\PolicyService\Providers;
+namespace Uniondrug\PolicySdk\Providers;
 
-use Uniondrug\PolicyService\InjectableTrait;
-use Uniondrug\PolicyService\Structs\Config;
+use Uniondrug\PolicySdk\InjectableTrait;
+use Uniondrug\PolicySdk\Structs\Config;
 
 abstract class AbstractCompanyProvider
 {

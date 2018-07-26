@@ -1,5 +1,5 @@
 <?php
-$prefixNameSpace = "Uniondrug\\PolicyService\\Providers\\";
+$prefixNameSpace = "Uniondrug\\PolicySdk\\Providers\\";
 return [
     /*
      * 华夏

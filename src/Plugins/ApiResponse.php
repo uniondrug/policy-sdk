@@ -2,7 +2,7 @@
 /**
  * ApiResponse.php
  */
-namespace Uniondrug\PolicyService\Plugins;
+namespace Uniondrug\PolicySdk\Plugins;
 
 class ApiResponse
 {

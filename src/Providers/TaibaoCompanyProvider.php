@@ -6,7 +6,7 @@
  * Time: 下午3:42
  */
 
-namespace Uniondrug\PolicyService\Providers;
+namespace Uniondrug\PolicySdk\Providers;
 
 /**
  * 太保保司
