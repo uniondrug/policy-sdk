@@ -10,7 +10,7 @@ namespace Uniondrug\PolicySdk\Plugins;
 
 use Uniondrug\PolicySdk\Injectable;
 
-class PolicySDK extends Injectable
+class PolicySdk extends Injectable
 {
     /**
      * 实例化一个保司对象
