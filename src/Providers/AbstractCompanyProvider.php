@@ -1,13 +1,11 @@
 <?php
 namespace Uniondrug\PolicySdk\Providers;
 
-use Uniondrug\PolicySdk\InjectableTrait;
+use Uniondrug\PolicySdk\Injectable;
 use Uniondrug\PolicySdk\Structs\Config;
 
-abstract class AbstractCompanyProvider
+abstract class AbstractCompanyProvider extends Injectable
 {
-    use InjectableTrait;
-
     /**
      * 保司的相关配置
      * @Config

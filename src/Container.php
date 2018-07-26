@@ -13,11 +13,6 @@ use Phalcon\Config;
 class Container extends Di\FactoryDefault implements ContainerInterface
 {
     /**
-     * Service Version
-     */
-    const VERSION = '1.0';
-
-    /**
      * @var string
      */
     protected $basePath;
@@ -51,30 +46,6 @@ class Container extends Di\FactoryDefault implements ContainerInterface
         $this->registerServices($providers);
     }
 
-    /**
-     * 实例化一个保司对象
-     * @param $cooperation
-     */
-    public function instance($cooperation)
-    {
-        $cooperation AND $this->setCooperation($cooperation);
-        try {
-            $instance = $this->get("policy:{$cooperation}");
-        } catch (\Exception $e) {
-            throw new \Exception("保司对象实例化异常");
-        }
-        return $instance;
-    }
-
-    /**
-     * Get the version number of pails.
-     *
-     * @return string
-     */
-    public function version()
-    {
-        return static::VERSION;
-    }
 
     /**
      * 注册服务列表

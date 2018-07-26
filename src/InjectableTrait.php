@@ -13,8 +13,6 @@ use Phalcon\Events\ManagerInterface;
 
 /**
  * interface InjectableTrait
- * @property \Uniondrug\PolicySdk\Plugins\Logger $logger
- * @property \Uniondrug\PolicySdk\Plugins\ApiResponse $apiResponse
  */
 trait InjectableTrait
 {

@@ -11,6 +11,7 @@ namespace Uniondrug\PolicySdk;
 
 use Uniondrug\PolicySdk\Plugins\ApiResponse;
 use Uniondrug\PolicySdk\Plugins\Logger;
+use Uniondrug\PolicySdk\Plugins\PolicySDK;
 
 class ServiceProvider
 {
@@ -35,6 +36,16 @@ class ServiceProvider
             'apiResponse',
             function () {
                 return new ApiResponse();
+            }
+        );
+
+        /*
+         * 保司实例化服务
+         */
+        $di->setShared(
+            'policySDK',
+            function () {
+                return new PolicySDK();
             }
         );
     }

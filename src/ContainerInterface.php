@@ -12,8 +12,6 @@ use Phalcon\DiInterface;
 
 interface ContainerInterface extends DiInterface
 {
-    public function version();
-
     public function setBasePath($basePath);
 
     public function logPath();

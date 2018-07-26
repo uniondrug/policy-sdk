@@ -17,6 +17,7 @@ class HuaXiaCompanyProvider extends AbstractCompanyProvider
 {
     public function insure(array $post, &$extResponse = [])
     {
+        $this->logger->insure()->info('asa');die;
         $postData = [
             'cooperation' => 'tongcheng',
             'waterNo' => $post['waterNo'],
