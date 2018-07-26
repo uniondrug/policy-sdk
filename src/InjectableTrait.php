@@ -6,15 +6,15 @@
  * Time: 上午12:33
  */
 
-namespace Uniondrug\PolicyService;
+namespace Uniondrug\PolicySdk;
 
 use Phalcon\DiInterface;
 use Phalcon\Events\ManagerInterface;
 
 /**
  * interface InjectableTrait
- * @property \Uniondrug\PolicyService\Plugins\Logger $logger
- * @property \Uniondrug\PolicyService\Plugins\ApiResponse $apiResponse
+ * @property \Uniondrug\PolicySdk\Plugins\Logger $logger
+ * @property \Uniondrug\PolicySdk\Plugins\ApiResponse $apiResponse
  */
 trait InjectableTrait
 {

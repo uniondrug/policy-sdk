@@ -6,7 +6,7 @@
  * Time: 下午11:31
  */
 
-namespace Uniondrug\PolicyService\Providers;
+namespace Uniondrug\PolicySdk\Providers;
 
 /**
  * 华夏保司

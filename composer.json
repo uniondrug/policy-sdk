@@ -18,7 +18,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Uniondrug\\PolicyService\\": "src/"
+      "Uniondrug\\PolicySdk\\": "src/"
     }
   },
   "config": {

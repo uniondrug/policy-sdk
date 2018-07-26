@@ -1,6 +1,6 @@
 <?php
 
-namespace Uniondrug\PolicyService;
+namespace Uniondrug\PolicySdk;
 
 use Phalcon\Di;
 use Phalcon\Config;
@@ -8,7 +8,7 @@ use Phalcon\Config;
 /**
  * 投保容器
  * Class Container
- * @package Uniondrug\PolicyService
+ * @package Uniondrug\PolicySdk
  */
 class Container extends Di\FactoryDefault implements ContainerInterface
 {

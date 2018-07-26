@@ -6,7 +6,7 @@
  * Time: 下午10:46
  */
 
-namespace Uniondrug\PolicyService;
+namespace Uniondrug\PolicySdk;
 
 use Phalcon\DiInterface;
 

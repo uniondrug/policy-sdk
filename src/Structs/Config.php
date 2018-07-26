@@ -1,10 +1,10 @@
 <?php
-namespace Uniondrug\PolicyService\Structs;
+namespace Uniondrug\PolicySdk\Structs;
 
 /**
  * 保司的相关配置类
  * Class Config
- * @package Uniondrug\PolicyService\Structs
+ * @package Uniondrug\PolicySdk\Structs
  */
 class Config
 {
