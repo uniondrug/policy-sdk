@@ -1,18 +1,42 @@
 <?php
-namespace Uniondrug\PolicySdk\Providers;
+/**
+ * Created by PhpStorm.
+ * User: luzhouyu
+ * Date: 18/7/27
+ * Time: 上午9:41
+ */
 
-use Uniondrug\PolicySdk\Injectable;
-use Uniondrug\PolicySdk\InjectableTrait;
+namespace Uniondrug\PolicySdk;
+
+use Uniondrug\PolicySdk\Plugins\ApiResponse;
+use Uniondrug\PolicySdk\Plugins\Logger;
 use Uniondrug\PolicySdk\Structs\Config;
 
-abstract class AbstractCompanyProvider extends Injectable
+abstract class Sdk
 {
-    use InjectableTrait;
     /**
      * 保司的相关配置
      * @Config
      */
-    public $config;
+    protected $config;
+
+    /**
+     * 日志服务
+     * @var Logger
+     */
+    protected $logger;
+
+    /**
+     * 统一响应结构
+     * @var ApiResponse
+     */
+    protected $apiResponse;
+
+    public function __construct($sdkName)
+    {
+        $this->logger = new Logger($sdkName);
+        $this->apiResponse = new ApiResponse();
+    }
 
     /*
      * 保司配置初始化

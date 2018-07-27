@@ -6,15 +6,23 @@
  * Time: 下午3:42
  */
 
-namespace Uniondrug\PolicySdk\Providers;
+namespace Uniondrug\PolicySdk\Modules;
+use Uniondrug\PolicySdk\Sdk;
 
 /**
  * 太保保司
- * Class TaibaoCompanyProvider
- * @package Uniondrug\PolicyService\Providers
+ * Class TaibaoCompanySdk
+ * @package Uniondrug\PolicySdk\Modules
  */
-class TaibaoCompanyProvider extends AbstractCompanyProvider
+class TaibaoCompanySdk extends Sdk
 {
+    const sdkName = "TB";
+
+    public function __construct()
+    {
+        parent::__construct(self::sdkName);
+    }
+
     public function insure(array $post, &$extResponse = [])
     {
         $xml_content = '<?xml version="1.0" encoding="UTF-8"?>

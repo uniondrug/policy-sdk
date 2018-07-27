@@ -6,18 +6,25 @@
  * Time: 下午11:31
  */
 
-namespace Uniondrug\PolicySdk\Providers;
+namespace Uniondrug\PolicySdk\Modules;
+use Uniondrug\PolicySdk\Sdk;
 
 /**
  * 华夏保司
- * Class HuaXiaCompanyProvider
- * @package Uniondrug\PolicyService\Providers
+ * Class HuaXiaCompanySdk
+ * @package Uniondrug\PolicySdk\Modules
  */
-class HuaXiaCompanyProvider extends AbstractCompanyProvider
+class HuaXiaCompanySdk extends Sdk
 {
+    const sdkName = "HX";
+
+    public function __construct()
+    {
+        parent::__construct(self::sdkName);
+    }
+
     public function insure(array $post, &$extResponse = [])
     {
-        $this->logger->insure()->info('asa');die;
         $postData = [
             'cooperation' => 'tongcheng',
             'waterNo' => $post['waterNo'],
