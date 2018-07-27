@@ -33,7 +33,7 @@ class PolicySdk
             return self::$_modules[$key];
         }
         //  检查定义
-        $sdkConfigFile = 'Configs' . DIRECTORY_SEPARATOR . 'sdk.php';
+        $sdkConfigFile = __DIR__ . DIRECTORY_SEPARATOR . 'Configs' . DIRECTORY_SEPARATOR . 'sdk.php';
         if (!file_exists($sdkConfigFile)) {
             throw new \Exception("sdk配置文件丢失");
         }
