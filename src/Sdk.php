@@ -8,8 +8,8 @@
 
 namespace Uniondrug\PolicySdk;
 
-use Uniondrug\PolicySdk\Plugins\ApiResponse;
 use Uniondrug\PolicySdk\Plugins\Logger;
+use Uniondrug\PolicySdk\Services\UtilService;
 use Uniondrug\PolicySdk\Structs\Config;
 
 abstract class Sdk
@@ -21,21 +21,22 @@ abstract class Sdk
     protected $config;
 
     /**
+     * 工具
+     * @var
+     */
+    protected $utilService;
+
+    /**
      * 日志服务
      * @var Logger
      */
     protected $logger;
 
-    /**
-     * 统一响应结构
-     * @var ApiResponse
-     */
-    protected $apiResponse;
 
     public function __construct($sdkName)
     {
         $this->logger = new Logger($sdkName);
-        $this->apiResponse = new ApiResponse();
+        $this->utilService = new UtilService();
     }
 
     /*
@@ -59,6 +60,35 @@ abstract class Sdk
      * @return mixed
      */
     public abstract function surrender(array $post);
+
+    /**
+     * 失败
+     * @param string $error
+     * @param int $errno
+     * @return array
+     */
+    public function withError(string $error, $errno = 1)
+    {
+        return [
+            'errno' => (string) $errno,
+            'error' => (string) $error,
+        ];
+    }
+
+    /**
+     * 成功
+     * @param array $data
+     * @param int $errno
+     * @return array
+     */
+    public function withData(array $data, $errno = 0)
+    {
+        return [
+            'errno' => (string) $errno,
+            'error' => '',
+            'data' => (object) $data,
+        ];
+    }
 
     /**
      * Http处理器

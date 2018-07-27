@@ -46,22 +46,22 @@ class TiananCompanySdk extends Sdk
         $this->logger->insure()->info("保司请求报文:".$postJson);
         $header = ['Content-Type: application/json'];
         try{
-            $result = $this->curl_https($this->localConfig->insure,$postJson,$header,'insure');
+            $result = $this->curl_https($this->config->insure,$postJson,$header,'insure');
         }catch (\Exception $e) {
-            return $this->apiResponse->withError($e->getMessage());
+            return $this->withError($e->getMessage());
         }
         $this->logger->insure()->info("保司响应报文:".$result);
         $resultObj = json_decode($result);
         if ($resultObj->retCode != "00") {
             $msg = (!$resultObj->retCode) ? $resultObj->resultDTO->resultMess : $resultObj->returnMsg;
-            return $this->apiResponse->withError($msg);
+            return $this->withError($msg);
         }
         $data = [
             'policyNo' => $resultObj->policyNo,
             'epolicyAddress' => urlencode(urldecode($resultObj->epolicyAddress)) ?: urlencode("http://www.tianan-life.com"),
             'transTime' => $resultObj->transTime ?: date("Y-m-d H:i:s"),
         ];
-        return $this->apiResponse->withData($data);
+        return $this->withData($data);
     }
 
     public function surrender(array $post)
@@ -80,21 +80,21 @@ class TiananCompanySdk extends Sdk
         $this->logger->surrender()->info("保司请求报文:".$postJson);
         $header = ['Content-Type: application/json'];
         try{
-            $result = $this->curl_https($this->localConfig->surrender,$postJson,$header,'surrender');
+            $result = $this->curl_https($this->config->surrender,$postJson,$header,'surrender');
         }catch (\Exception $e) {
-            return $this->apiResponse->withError($e->getMessage());
+            return $this->withError($e->getMessage());
         }
         $this->logger->surrender()->info("保司响应报文:".$result);
         $resultObj = json_decode($result);
         if ($resultObj->retCode != "00") {
             $msg = (!$resultObj->retCode) ? $resultObj->resultDTO->resultMess : $resultObj->returnMsg;
-            return $this->apiResponse->withError($msg);
+            return $this->withError($msg);
         }
         $data = [
             'policyNo' => $post['policyNo'],
             'transTime' => $resultObj->transTime ?: date("Y-m-d H:i:s")
         ];
-        return $this->apiResponse->withData($data);
+        return $this->withData($data);
     }
 
     protected function getPolicyInfo($policyInfo,$extSchema = [])

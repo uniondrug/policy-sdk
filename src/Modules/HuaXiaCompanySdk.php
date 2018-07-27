@@ -46,19 +46,19 @@ class HuaXiaCompanySdk extends Sdk
         try {
             $result = $this->curl_https($this->config->insure, $postQuery, $header, 'insure');
         } catch (\Exception $e) {
-            return $this->apiResponse->withError($e->getMessage());
+            return $this->withError($e->getMessage());
         }
         $this->logger->insure()->info("保司响应报文:" . $result);
         $resultObj = json_decode($result);
         if ($resultObj->retCode != "00") {
-            return $this->apiResponse->withError($resultObj->retDesc);
+            return $this->withError($resultObj->retDesc);
         }
         $data = [
             'policyNo' => $resultObj->policyNum,
             'epolicyAddress' => urlencode(urldecode($resultObj->edocPath)),
             'transTime' => $resultObj->transTime ?: date("Y-m-d H:i:s"),
         ];
-        return $this->apiResponse->withData($data);
+        return $this->withData($data);
     }
 
     public function surrender(array $post)
@@ -80,19 +80,19 @@ class HuaXiaCompanySdk extends Sdk
         try {
             $result = $this->curl_https($this->config->surrender, $postQuery, $header, 'surrender');
         } catch (\Exception $e) {
-            return $this->apiResponse->withError($e->getMessage());
+            return $this->withError($e->getMessage());
         }
         $this->logger->surrender()->info("保司响应报文:" . $result);
         $resultObj = json_decode($result);
         if ($resultObj->retCode != "00") {
             $msg = $resultObj->retDesc ?: $resultObj->returnMsg;
-            return $this->apiResponse->withError($msg);
+            return $this->withError($msg);
         }
         $data = [
             'policyNo' => $post['policyNo'],
             'transTime' => $resultObj->transTime ?: date("Y-m-d H:i:s")
         ];
-        return $this->apiResponse->withData($data);
+        return $this->withData($data);
     }
 
 
@@ -104,7 +104,7 @@ class HuaXiaCompanySdk extends Sdk
             'nonce' => substr(md5(microtime(1)), 0, 20),
             'data' => json_encode($postData, JSON_UNESCAPED_UNICODE)
         ];
-        $params['signature'] = md5($this->getLinkString($params) . $this->localConfig->key);
+        $params['signature'] = md5($this->getLinkString($params) . $this->config->key);
         return $params;
     }
 

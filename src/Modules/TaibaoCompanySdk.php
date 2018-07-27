@@ -32,8 +32,8 @@ class TaibaoCompanySdk extends Sdk
                 <transactionCode>108001</transactionCode>
                 <messageId>' . $post['waterNo'] . '</messageId>
                 <transactionEffectiveDate>' . date("Y-m-d H:i:s") . '</transactionEffectiveDate>
-                <user>' . $this->localConfig->user . '</user>
-                <password>' . $this->localConfig->password . '</password>
+                <user>' . $this->config->user . '</user>
+                <password>' . $this->config->password . '</password>
             </head>
             <body>
                 <PolicyApplyRequest>
@@ -73,16 +73,16 @@ class TaibaoCompanySdk extends Sdk
         $header = ['Content-Type: application/x-www-form-urlencoded'];;
         $postQuery = http_build_query($postData);
         try {
-            $result = $this->curl_https($this->localConfig->insure, $postQuery, $header, 'insure');
+            $result = $this->curl_https($this->config->insure, $postQuery, $header, 'insure');
         } catch (\Exception $e) {
-            return $this->apiResponse->withError($e->getMessage());
+            return $this->withError($e->getMessage());
         }
         $this->logger->insure()->info("保司响应报文:" . $result);
         $resultObj = json_decode(str_replace("{}", '""', json_encode((array)simplexml_load_string($result))));
         $messageStatusCode = $resultObj->head->responseCompleteMessageStatus->messageStatusCode;
         if ($messageStatusCode != "000000") {
             $msg = $resultObj->head->responseCompleteMessageStatus->messageStatusDescriptionList->messageStatusDescription->messageStatusSubDescription;
-            return $this->apiResponse->withError($msg);
+            return $this->withError($msg);
         }
         $dataObj = $resultObj->body->PolicyApplyResponse;
         $data = [
@@ -93,7 +93,7 @@ class TaibaoCompanySdk extends Sdk
         $extResponse = [
             'billNo' => $dataObj->billNo
         ];
-        return $this->apiResponse->withData($data);
+        return $this->withData($data);
 
     }
 
@@ -107,8 +107,8 @@ class TaibaoCompanySdk extends Sdk
                 <transactionCode>108003</transactionCode>
                 <messageId>' . $post['billNo'] . '</messageId>
                 <transactionEffectiveDate>' . date("Y-m-d H:i:s") . '</transactionEffectiveDate>
-                <user>' . $this->localConfig->user . '</user>
-                <password>' . $this->localConfig->password . '</password>
+                <user>' . $this->config->user . '</user>
+                <password>' . $this->config->password . '</password>
             </head>
             <body>
                 <PolicyCancellationRequest>
@@ -148,9 +148,9 @@ class TaibaoCompanySdk extends Sdk
         $header = ['Content-Type: application/x-www-form-urlencoded'];
         $postQuery = http_build_query($postData);
         try {
-            $result = $this->curl_https($this->localConfig->surrender, $postQuery, $header, 'insure');
+            $result = $this->curl_https($this->config->surrender, $postQuery, $header, 'insure');
         } catch (\Exception $e) {
-            return $this->apiResponse->withError($e->getMessage());
+            return $this->withError($e->getMessage());
         }
         $this->logger->surrender()->info("保司响应报文:" . $result);
         $resultObj = json_decode(str_replace("{}", '""', json_encode((array)simplexml_load_string($result))));
@@ -161,7 +161,7 @@ class TaibaoCompanySdk extends Sdk
                 'policyNo' => $post['policyNo'],
                 'transTime' => $resultObj->transTime ?: date("Y-m-d H:i:s")
             ];
-            return $this->apiResponse->withData($data);
+            return $this->withData($data);
         } else {
             switch ($resultCode) {
                 case "01":
@@ -180,7 +180,7 @@ class TaibaoCompanySdk extends Sdk
                     $msg = $resultObj->head->responseCompleteMessageStatus->messageStatusDescriptionList->messageStatusDescription->messageStatusSubDescription;
                     break;
             }
-            return $this->apiResponse->withError($msg);
+            return $this->withError($msg);
         }
     }
 
