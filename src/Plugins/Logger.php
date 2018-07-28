@@ -23,8 +23,9 @@ class Logger
      */
     public function __call($name, $arguments)
     {
+        $logPath = $this->di ? $this->di->logPath() : './log';
         $date = date('Y-m-d');
-        $dir = $this->di->logPath()  . DIRECTORY_SEPARATOR . $name . DIRECTORY_SEPARATOR . $this->sdkName . DIRECTORY_SEPARATOR;
+        $dir = $logPath  . DIRECTORY_SEPARATOR . $name . DIRECTORY_SEPARATOR . $this->sdkName . DIRECTORY_SEPARATOR;
         @mkdir($dir,0777, true);
         $logFile = $dir . $date . '.log';
         return new File($logFile);
