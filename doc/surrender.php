@@ -11,5 +11,6 @@ return '{
   "tradeNo": "U0000000000001",
   "auth": [],
   "rationType": "TC001",
-  "riskCode": "TC001"
+  "riskCode": "TC001",
+  "policyNo": "86242447046978568193"
 }';

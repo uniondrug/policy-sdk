@@ -108,7 +108,6 @@ class TiananCompanySdk extends Sdk
             'sex' => $policyInfo['policySex'],
             'applicantType' => '1'
         ];
-
     }
 
     protected function getInsuredList($insuredList, $extSchema = [])

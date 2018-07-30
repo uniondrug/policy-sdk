@@ -7,25 +7,27 @@ return '{
     "timestamp": "1528257733",
     "tradeDate": "2018-06-06 04:02:13"
   },
-  "waterNo": "U0000000000003",
+  "waterNo": "U00000000000000221",
   "orderNo": "10001",
-  "startDate": "2018-06-06 04:02:13",
-  "endDate": "2018-06-07 04:02:13",
-  "totalPremium": 1000,
+  "startDate": "2018-08-06 04:02:13",
+  "endDate": "2018-08-07 04:02:13",
+  "totalPremium": 80,
+  "sumAssured": 1000,
   "applyType": "D",
   "applyPeriod": 365,
   "projectCode": "100001",
   "productCode": "210001",
   "policyInfo": {
-    "policyName": "投保人",
+    "policyName": "luzhouyu",
     "policySex": "01",
     "policyIdentifyType": "01",
     "policyIdentifyNumber": "32068119910721361X",
-    "policyBirthday": "1991-07-21"
+    "policyBirthday": "1991-07-21",
+    "policyMobile": "15240234572"
   },
   "insuredList": [{
     "insuredSeqNo": "1",
-    "insuredName": "被保人",
+    "insuredName": "陆周宇",
     "insuredSex": "01",
     "insuredIdentifyType": "01",
     "insuredIdentifyNumber": "32068119910721361X",
@@ -35,8 +37,8 @@ return '{
     "ticketNo": "T398",
     "trafficStartTime": "20180620104000",
     "trafficEndTime": "20180620132500",
-    "departure": "厦门",
-    "destination": "石家庄"
+    "departure": "xiamen",
+    "destination": "shijiazhuang"
   },
   "insuranceExt": [],
   "policyExt": [],
@@ -44,7 +46,7 @@ return '{
   "dynamicExt": ["ticketNo", "trafficStartTime", "trafficEndTime", "departure", "destination"],
   "issuedDate": "2018-06-20 14:13:06",
   "inputDate": "2018-06-20 14:13:06",
-  "rationType": "TC001",
-  "riskCode": "TC001",
+  "rationType": "Q070000176",
+  "riskCode": "Q070000176",
   "comCode": ""
 }';

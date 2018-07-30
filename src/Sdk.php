@@ -67,7 +67,7 @@ abstract class Sdk
      * @param int $errno
      * @return array
      */
-    public function withError(string $error, $errno = 1)
+    public function withError(string $error = "", $errno = 1)
     {
         return (object)[
             'errno' => (string) $errno,
@@ -81,11 +81,11 @@ abstract class Sdk
      * @param int $errno
      * @return array
      */
-    public function withData(array $data, $errno = 0)
+    public function withData(array $data = [], $errno = 0)
     {
         return (object)[
             'errno' => (string) $errno,
-            'error' => '',
+            'error' => 'Success',
             'data' => (object) $data,
         ];
     }

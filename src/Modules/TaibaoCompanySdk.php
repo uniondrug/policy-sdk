@@ -270,28 +270,31 @@ class TaibaoCompanySdk extends Sdk
                 </Applicant>';
     }
 
-    /*
-    * 证件类型转换
-    * 通用
-    * 身份证 01 /  军官证 02 / 护照 03 / 外国居留证 09 / 其它 11  / 营业证号 55
-    * 太保
-    * 身份证 1  /  护照   2  / 其它 3 /  组织机构代码 4 / 营业证号 5 / 其它  6
-    */
+    /**
+     * 证件类型转换
+     * @param $identityType
+     * @return int
+     */
     protected function convertIdentifyType($identityType)
     {
         switch ($identityType) {
+            //  身份证
             case "01":
                 $type = 1;
                 break;
+            //  护照
             case "03":
                 $type = 2;
                 break;
-            case "55":
+            //  组织机构代码
+            case "09":
+                $type = 4;
+                break;
+            //  营业证号
+            case "10":
                 $type = 5;
                 break;
-            case "02":
-            case "09":
-            case "11":
+            //  其它
             default:
                 $type = 3;
                 break;
