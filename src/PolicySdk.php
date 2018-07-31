@@ -48,5 +48,19 @@ class PolicySdk
         // 3. 未定义的SDK服务
         throw new \Exception("SDK包中未找到'{$cooperation}'定义");
     }
+
+    /**
+     * 获取配置
+     */
+    public static function config()
+    {
+        $sdkConfigFile = __DIR__ . DIRECTORY_SEPARATOR . 'Configs' . DIRECTORY_SEPARATOR . 'sdk.php';
+        $config = require_once $sdkConfigFile;
+        $keys = array_keys($config);
+        foreach ($keys as $val) {
+            $data[] = explode(":",$val)[1];
+        }
+        return $data;
+    }
 }
 
