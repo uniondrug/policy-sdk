@@ -76,7 +76,7 @@ class YangguangCompanySdk extends Sdk
         $policyObj = $orderObj['POLICY'];
         if ($orderObj['@attributes']['RETURN'] != 'true') {
             $error = $orderObj['@attributes']['ERROR'] ?: "";
-            $error = !$error ? $policyObj['ERROR']['@attributes']['INFO'] : "未知异常,请联系管理员";
+            $error = !$error ? $policyObj['ERROR']['@attributes']['INFO'] : "";
             return $this->withError($error);
         }
         $data = [

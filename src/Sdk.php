@@ -67,8 +67,9 @@ abstract class Sdk
      * @param int $errno
      * @return array
      */
-    public function withError(string $error = "", $errno = 1)
+    public function withError($error = "", $errno = 1)
     {
+        $error = $error ?: "未知异常,请联系管理员";
         return (object)[
             'errno' => (string) $errno,
             'error' => (string) $error,
@@ -81,7 +82,7 @@ abstract class Sdk
      * @param int $errno
      * @return array
      */
-    public function withData(array $data = [], $errno = 0)
+    public function withData($data = [], $errno = 0)
     {
         return (object)[
             'errno' => (string) $errno,
