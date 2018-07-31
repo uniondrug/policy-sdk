@@ -52,7 +52,7 @@ class PolicySdk
     /**
      * 获取配置
      */
-    public static function config()
+    public function config()
     {
         $sdkConfigFile = __DIR__ . DIRECTORY_SEPARATOR . 'Configs' . DIRECTORY_SEPARATOR . 'sdk.php';
         $config = require_once $sdkConfigFile;

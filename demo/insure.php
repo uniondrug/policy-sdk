@@ -4,10 +4,6 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 $policySdk = new Uniondrug\PolicySdk\PolicySdk();
 
-$config = $policySdk::config();
-
-var_dump($config);die;
-
 $json = require_once __DIR__ . DIRECTORY_SEPARATOR . 'doc' . DIRECTORY_SEPARATOR . 'insure.php';
 
 $instance = $policySdk->instance("YG");
