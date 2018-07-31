@@ -1,4 +1,5 @@
-{
+<?php
+return '{
   "requestHead": {
     "cooperation": "HXRS",
     "nonce": "7896B8FDBE9527DFE88A6DF3B088569D",
@@ -10,5 +11,6 @@
   "tradeNo": "U0000000000001",
   "auth": [],
   "rationType": "TC001",
-  "riskCode": "TC001"
-}
+  "riskCode": "TC001",
+  "policyNo": "86242447046978568193"
+}';

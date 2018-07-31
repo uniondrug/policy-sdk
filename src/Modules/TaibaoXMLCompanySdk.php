@@ -6,15 +6,23 @@
  * Time: 下午3:42
  */
 
-namespace Uniondrug\PolicySdk\Providers;
+namespace Uniondrug\PolicySdk\Modules;
+use Uniondrug\PolicySdk\Sdk;
 
 /**
- * 太保保司
- * Class TaibaoCompanyProvider
- * @package Uniondrug\PolicyService\Providers
+ * 太保保司xml报文
+ * Class TaibaoXMLCompanySdk
+ * @package Uniondrug\PolicySdk\Modules
  */
-class TaibaoCompanyProvider extends AbstractCompanyProvider
+class TaibaoXMLCompanySdk extends Sdk
 {
+    const sdkName = "TAIBAOXML";
+
+    public function __construct()
+    {
+        parent::__construct(self::sdkName);
+    }
+
     public function insure(array $post, &$extResponse = [])
     {
         $xml_content = '<?xml version="1.0" encoding="UTF-8"?>
@@ -24,8 +32,8 @@ class TaibaoCompanyProvider extends AbstractCompanyProvider
                 <transactionCode>108001</transactionCode>
                 <messageId>' . $post['waterNo'] . '</messageId>
                 <transactionEffectiveDate>' . date("Y-m-d H:i:s") . '</transactionEffectiveDate>
-                <user>' . $this->localConfig->user . '</user>
-                <password>' . $this->localConfig->password . '</password>
+                <user>' . $this->config->user . '</user>
+                <password>' . $this->config->password . '</password>
             </head>
             <body>
                 <PolicyApplyRequest>
@@ -65,16 +73,16 @@ class TaibaoCompanyProvider extends AbstractCompanyProvider
         $header = ['Content-Type: application/x-www-form-urlencoded'];;
         $postQuery = http_build_query($postData);
         try {
-            $result = $this->curl_https($this->localConfig->insure, $postQuery, $header, 'insure');
+            $result = $this->curl_https($this->config->insure, $postQuery, $header, 'insure');
         } catch (\Exception $e) {
-            return $this->apiResponse->withError($e->getMessage());
+            return $this->withError($e->getMessage());
         }
         $this->logger->insure()->info("保司响应报文:" . $result);
         $resultObj = json_decode(str_replace("{}", '""', json_encode((array)simplexml_load_string($result))));
         $messageStatusCode = $resultObj->head->responseCompleteMessageStatus->messageStatusCode;
         if ($messageStatusCode != "000000") {
             $msg = $resultObj->head->responseCompleteMessageStatus->messageStatusDescriptionList->messageStatusDescription->messageStatusSubDescription;
-            return $this->apiResponse->withError($msg);
+            return $this->withError($msg);
         }
         $dataObj = $resultObj->body->PolicyApplyResponse;
         $data = [
@@ -85,7 +93,7 @@ class TaibaoCompanyProvider extends AbstractCompanyProvider
         $extResponse = [
             'billNo' => $dataObj->billNo
         ];
-        return $this->apiResponse->withData($data);
+        return $this->withData($data);
 
     }
 
@@ -99,8 +107,8 @@ class TaibaoCompanyProvider extends AbstractCompanyProvider
                 <transactionCode>108003</transactionCode>
                 <messageId>' . $post['billNo'] . '</messageId>
                 <transactionEffectiveDate>' . date("Y-m-d H:i:s") . '</transactionEffectiveDate>
-                <user>' . $this->localConfig->user . '</user>
-                <password>' . $this->localConfig->password . '</password>
+                <user>' . $this->config->user . '</user>
+                <password>' . $this->config->password . '</password>
             </head>
             <body>
                 <PolicyCancellationRequest>
@@ -140,9 +148,9 @@ class TaibaoCompanyProvider extends AbstractCompanyProvider
         $header = ['Content-Type: application/x-www-form-urlencoded'];
         $postQuery = http_build_query($postData);
         try {
-            $result = $this->curl_https($this->localConfig->surrender, $postQuery, $header, 'insure');
+            $result = $this->curl_https($this->config->surrender, $postQuery, $header, 'insure');
         } catch (\Exception $e) {
-            return $this->apiResponse->withError($e->getMessage());
+            return $this->withError($e->getMessage());
         }
         $this->logger->surrender()->info("保司响应报文:" . $result);
         $resultObj = json_decode(str_replace("{}", '""', json_encode((array)simplexml_load_string($result))));
@@ -153,7 +161,7 @@ class TaibaoCompanyProvider extends AbstractCompanyProvider
                 'policyNo' => $post['policyNo'],
                 'transTime' => $resultObj->transTime ?: date("Y-m-d H:i:s")
             ];
-            return $this->apiResponse->withData($data);
+            return $this->withData($data);
         } else {
             switch ($resultCode) {
                 case "01":
@@ -172,7 +180,7 @@ class TaibaoCompanyProvider extends AbstractCompanyProvider
                     $msg = $resultObj->head->responseCompleteMessageStatus->messageStatusDescriptionList->messageStatusDescription->messageStatusSubDescription;
                     break;
             }
-            return $this->apiResponse->withError($msg);
+            return $this->withError($msg);
         }
     }
 
@@ -262,28 +270,31 @@ class TaibaoCompanyProvider extends AbstractCompanyProvider
                 </Applicant>';
     }
 
-    /*
-    * 证件类型转换
-    * 通用
-    * 身份证 01 /  军官证 02 / 护照 03 / 外国居留证 09 / 其它 11  / 营业证号 55
-    * 太保
-    * 身份证 1  /  护照   2  / 其它 3 /  组织机构代码 4 / 营业证号 5 / 其它  6
-    */
+    /**
+     * 证件类型转换
+     * @param $identityType
+     * @return int
+     */
     protected function convertIdentifyType($identityType)
     {
         switch ($identityType) {
+            //  身份证
             case "01":
                 $type = 1;
                 break;
+            //  护照
             case "03":
                 $type = 2;
                 break;
-            case "55":
+            //  组织机构代码
+            case "09":
+                $type = 4;
+                break;
+            //  营业证号
+            case "10":
                 $type = 5;
                 break;
-            case "02":
-            case "09":
-            case "11":
+            //  其它
             default:
                 $type = 3;
                 break;

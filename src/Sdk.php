@@ -1,18 +1,43 @@
 <?php
-namespace Uniondrug\PolicySdk\Providers;
+/**
+ * Created by PhpStorm.
+ * User: luzhouyu
+ * Date: 18/7/27
+ * Time: 上午9:41
+ */
 
-use Uniondrug\PolicySdk\InjectableTrait;
+namespace Uniondrug\PolicySdk;
+
+use Uniondrug\PolicySdk\Plugins\Logger;
+use Uniondrug\PolicySdk\Services\UtilService;
 use Uniondrug\PolicySdk\Structs\Config;
 
-abstract class AbstractCompanyProvider
+abstract class Sdk
 {
-    use InjectableTrait;
-
     /**
      * 保司的相关配置
      * @Config
      */
-    public $config;
+    protected $config;
+
+    /**
+     * 工具
+     * @var
+     */
+    protected $utilService;
+
+    /**
+     * 日志服务
+     * @var Logger
+     */
+    protected $logger;
+
+
+    public function __construct($sdkName)
+    {
+        $this->logger = new Logger($sdkName);
+        $this->utilService = new UtilService();
+    }
 
     /*
      * 保司配置初始化
@@ -35,6 +60,36 @@ abstract class AbstractCompanyProvider
      * @return mixed
      */
     public abstract function surrender(array $post);
+
+    /**
+     * 失败
+     * @param string $error
+     * @param int $errno
+     * @return array
+     */
+    public function withError($error = "", $errno = 1)
+    {
+        $error = $error ?: "未知异常,请联系管理员";
+        return (object)[
+            'errno' => (string) $errno,
+            'error' => (string) $error,
+        ];
+    }
+
+    /**
+     * 成功
+     * @param array $data
+     * @param int $errno
+     * @return array
+     */
+    public function withData($data = [], $errno = 0)
+    {
+        return (object)[
+            'errno' => (string) $errno,
+            'error' => 'Success',
+            'data' => (object) $data,
+        ];
+    }
 
     /**
      * Http处理器
