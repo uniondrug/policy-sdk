@@ -3,25 +3,25 @@ return [
     /*
      * 华夏
      */
-    'Sdk:HX' => "HuaXiaCompanySdk",
+    'Sdk:HUAXIA' => "HuaXiaCompanySdk",
     /*
      * 人保
      */
-    'Sdk:RB' => "RenbaoCompanySdk",
+    'Sdk:RENBAO' => "RenbaoCompanySdk",
     /*
      * 太保
      */
-    'Sdk:TB' => "TaibaoCompanySdk",
+    'Sdk:TAIBAO' => "TaibaoCompanySdk",
     /*
      * 天安
      */
-    'Sdk:TA' => "TiananCompanySdk",
+    'Sdk:TIANAN' => "TiananCompanySdk",
     /*
      * 阳光
      */
-    'Sdk:YG' => "YangguangCompanySdk",
+    'Sdk:YANGGUANG' => "YangguangCompanySdk",
     /*
      * 永安
      */
-    'Sdk:YA' => "YonganCompanySdk",
+    'Sdk:YONGAN' => "YonganCompanySdk",
 ];
