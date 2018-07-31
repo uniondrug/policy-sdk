@@ -10,13 +10,13 @@ namespace Uniondrug\PolicySdk\Modules;
 use Uniondrug\PolicySdk\Sdk;
 
 /**
- * 太保保司
- * Class TaibaoCompanySdk
+ * 太保保司xml报文
+ * Class TaibaoXMLCompanySdk
  * @package Uniondrug\PolicySdk\Modules
  */
-class TaibaoCompanySdk extends Sdk
+class TaibaoXMLCompanySdk extends Sdk
 {
-    const sdkName = "TAIBAO";
+    const sdkName = "TAIBAOXML";
 
     public function __construct()
     {
