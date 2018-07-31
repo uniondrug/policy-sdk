@@ -16,7 +16,7 @@ use Uniondrug\PolicySdk\Sdk;
  */
 class RenbaoCompanySdk extends Sdk
 {
-    const sdkName = "RB";
+    const sdkName = "RENBAO";
 
     public function __construct()
     {

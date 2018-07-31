@@ -18,7 +18,7 @@ use Uniondrug\PolicySdk\Sdk;
  */
 class YonganCompanySdk extends Sdk
 {
-    const sdkName = "YA";
+    const sdkName = "YONGAN";
 
     public function __construct()
     {

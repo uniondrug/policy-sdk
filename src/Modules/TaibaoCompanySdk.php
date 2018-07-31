@@ -16,7 +16,7 @@ use Uniondrug\PolicySdk\Sdk;
  */
 class TaibaoCompanySdk extends Sdk
 {
-    const sdkName = "TB";
+    const sdkName = "TAIBAO";
 
     public function __construct()
     {

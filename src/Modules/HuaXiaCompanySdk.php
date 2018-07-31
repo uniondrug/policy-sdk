@@ -16,7 +16,7 @@ use Uniondrug\PolicySdk\Sdk;
  */
 class HuaXiaCompanySdk extends Sdk
 {
-    const sdkName = "HX";
+    const sdkName = "HUAXIA";
 
     public function __construct()
     {
