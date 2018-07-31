@@ -4,7 +4,6 @@
   "keywords":["Phalcon","Policy"],
   "type": "library",
   "license": "MIT",
-  "minimum-stability": "stable",
   "authors": [
     {
       "name": "Uniondrug Dev Team",
@@ -21,9 +20,5 @@
     "psr-4": {
       "Uniondrug\\PolicySdk\\": "src/"
     }
-  },
-  "config": {
-    "sort-packages": true
-  },
-  "prefer-stable": true
+  }
 }
