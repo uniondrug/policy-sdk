@@ -39,8 +39,8 @@ class TiananCompanySdk extends Sdk
             'insuredDataDtoList' => $this->getInsuredList($post['insuredList'], $post['insuredExt']),
             'dynamicDto' => $this->getDynamic($post['dynamicDto'], $post['dynamicExt'])
         ];
-        if (count($post['auth'])) {
-            $postData['requestHead'] = $this->createRequestHead($post['auth']['channel'],$post['auth']['token']);
+        if ($this->config->cooperation && $this->config->token) {
+            $postData['requestHead'] = $this->createRequestHead($this->config->cooperation,$this->config->token);
         }
         $postJson = json_encode($postData,JSON_UNESCAPED_UNICODE);
         $this->logger->insure()->info("保司请求报文:".$postJson);
@@ -73,8 +73,8 @@ class TiananCompanySdk extends Sdk
             'withdrawdate' => $post['transTime'],   //  投保时间
             'policyNo' => $post['policyNo']
         ];
-        if (count($post['auth'])) {
-            $postData['requestHead'] = $this->createRequestHead($post['auth']['channel'],$post['auth']['token']);
+        if ($this->config->cooperation && $this->config->token) {
+            $postData['requestHead'] = $this->createRequestHead($this->config->cooperation,$this->config->token);
         }
         $postJson = json_encode($postData,JSON_UNESCAPED_UNICODE);
         $this->logger->surrender()->info("保司请求报文:".$postJson);
