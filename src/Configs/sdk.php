@@ -9,13 +9,9 @@ return [
      */
     'Sdk:RENBAO' => "RenbaoCompanySdk",
     /*
-     * 太保XML
+     * 太保
      */
-    'Sdk:TAIBAOXML' => "TaibaoXMLCompanySdk",
-    /*
-    * 太保JSON
-    */
-    'Sdk:TAIBAOJSON' => "TaibaoJSONCompanySdk",
+    'Sdk:TAIBAO' => "TaibaoCompanySdk",
     /*
      * 天安
      */

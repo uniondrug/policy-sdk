@@ -11,12 +11,12 @@ use Uniondrug\PolicySdk\Sdk;
 
 /**
  * 太保保司xml报文
- * Class TaibaoXMLCompanySdk
+ * Class TaibaoCompanySdk
  * @package Uniondrug\PolicySdk\Modules
  */
-class TaibaoXMLCompanySdk extends Sdk
+class TaibaoCompanySdk extends Sdk
 {
-    const sdkName = "TAIBAOXML";
+    const sdkName = "TAIBAO";
 
     public function __construct()
     {
@@ -45,8 +45,8 @@ class TaibaoXMLCompanySdk extends Sdk
                         <coverageCopies>1</coverageCopies>
                         <startDate>' . $post['startDate'] . '</startDate>
                         <endDate>' . $post['endDate'] . '</endDate>
-                        <sumInsured/>
-                        <policyPremium/>
+                        <sumInsured>' . $post['sumAssured'] . '</sumInsured>
+                        <policyPremium>' . $post['totalPremium'] . '</policyPremium>
                         <uniqueFlag>' . $post['waterNo'] . '</uniqueFlag>
                     </PolicyBaseInfo>
                    ' . $this->getPolicyInfo($post['policyInfo'], $post['policyExt']) . '
@@ -197,11 +197,11 @@ class TaibaoXMLCompanySdk extends Sdk
     public function getDynamic($dynamicDto, $dynamicExt = [], $post = [])
     {
         $data = '<FactorList>';
-        $data .= '<Factor>
+        if (in_array('ticketNo', $dynamicExt)) {
+            $data .= '<Factor>
                     <factorCode>HC000</factorCode>
                     <factorValue>' . $post['inputDate'] . '</factorValue>
                   </Factor>';
-        if (in_array('ticketNo', $dynamicExt)) {
             $data .= '<Factor>
                         <factorCode>B4001</factorCode>
                         <factorValue>' . $dynamicDto['ticketNo'] . '</factorValue>
