@@ -46,8 +46,8 @@ class TaibaoCompanySdk extends Sdk
                         <startDate>' . $post['startDate'] . '</startDate>
                         <endDate>' . $post['endDate'] . '</endDate>
                         <sumInsured>' . $post['sumAssured'] . '</sumInsured>
-                        <policyPremium>' . $post['totalPremium'] . '</policyPremium>
-                        <uniqueFlag>' . $post['waterNo'] . '</uniqueFlag>
+                        <policyPremium/>
+                        <uniqueFlag/>
                     </PolicyBaseInfo>
                    ' . $this->getPolicyInfo($post['policyInfo'], $post['policyExt']) . '
                    ' . $this->getInsuredList($post['insuredList'], $post['insuredExt']) . '
