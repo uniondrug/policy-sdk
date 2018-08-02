@@ -67,7 +67,6 @@ class TaibaoJSONCompanySdk extends Sdk
             'waterNo' => $post['waterNo'],
             'productCode' => $post['riskCode'],
             'rationType' => $post['rationType'],
-            'withdrawdate' => $post['transTime'],   //  投保时间
             'policyNo' => $post['policyNo']
         ];
         $postData['requestHead'] = $this->createRequestHead('tongcheng',$this->config->token);
