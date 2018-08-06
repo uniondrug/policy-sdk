@@ -15,6 +15,14 @@ namespace Uniondrug\PolicySdk;
  */
 class PolicySdk
 {
+    private $config;
+
+    public function __construct()
+    {
+        $sdkConfigFile = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'config.php';
+        $this->config = require_once $sdkConfigFile;
+    }
+
     /**
      * SDK模块列表
      * @var array
@@ -27,23 +35,19 @@ class PolicySdk
      */
     public function instance($cooperation)
     {
-        $key = "Sdk:".strtoupper($cooperation);
+        $key = "Sdk:" . strtoupper($cooperation);
         //  从上个实例中读取
         if (isset(self::$_modules[$key])) {
             return self::$_modules[$key];
         }
         //  检查定义
-        $sdkConfigFile = __DIR__ . DIRECTORY_SEPARATOR . 'Configs' . DIRECTORY_SEPARATOR . 'sdk.php';
-        if (!file_exists($sdkConfigFile)) {
-            throw new \Exception("sdk配置文件丢失");
-        }
-        $config = require_once $sdkConfigFile;
-        $class = __NAMESPACE__.'\\Modules\\'.$config[$key];
+        $name = $this->config[$key];
+        $class = __NAMESPACE__ . '\\Sdks\\' . $name . '\\Base';
         try {
-            $instance = new $class();
+            $instance = new $class($name);
             self::$_modules[$key] = $instance;
             return self::$_modules[$key];
-        } catch(\Throwable $e) {
+        } catch (\Throwable $e) {
         }
         // 3. 未定义的SDK服务
         throw new \Exception("SDK包中未找到'{$cooperation}'定义");
@@ -54,11 +58,9 @@ class PolicySdk
      */
     public function config()
     {
-        $sdkConfigFile = __DIR__ . DIRECTORY_SEPARATOR . 'Configs' . DIRECTORY_SEPARATOR . 'sdk.php';
-        $config = require_once $sdkConfigFile;
-        $keys = array_keys($config);
+        $keys = array_keys($this->config);
         foreach ($keys as $val) {
-            $data[] = explode(":",$val)[1];
+            $data[] = explode(":", $val)[1];
         }
         return $data;
     }

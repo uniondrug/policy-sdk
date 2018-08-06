@@ -18,19 +18,19 @@ abstract class Sdk
      * 保司的相关配置
      * @Config
      */
-    protected $config;
+    public $config;
 
     /**
      * 工具
      * @var
      */
-    protected $utilService;
+    public $utilService;
 
     /**
      * 日志服务
      * @var Logger
      */
-    protected $logger;
+    public $logger;
 
 
     public function __construct($sdkName)
@@ -42,24 +42,10 @@ abstract class Sdk
     /*
      * 保司配置初始化
      */
-    public function setConfig($config) {
+    public function setConfig($config)
+    {
         $this->config = new Config($config);
     }
-
-    /**
-     * 投保
-     * @param array $post   入参
-     * @param array $extResponse 额外的响应参数
-     * @return mixed
-     */
-    public abstract function insure(array $post,&$extResponse = []);
-
-    /**
-     * 退保
-     * @param array $post
-     * @return mixed
-     */
-    public abstract function surrender(array $post);
 
     /**
      * 失败

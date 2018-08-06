@@ -1,30 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: luzhouyu
- * Date: 18/7/29
- * Time: 下午11:02
- */
 
-namespace Uniondrug\PolicySdk\Modules;
+namespace Uniondrug\PolicySdk\Sdks\YangGuang\Modules;
 
-
-use Uniondrug\PolicySdk\Sdk;
-
-/**
- * 阳光保司
- * Class YangguangCompanySdk
- * @package Uniondrug\PolicySdk\Modules
- */
-class YangguangCompanySdk extends Sdk
+trait Insure
 {
-    const sdkName = "YANGGUANG";
-
-    public function __construct()
-    {
-        parent::__construct(self::sdkName);
-    }
-
     public function insure(array $post, &$extResponse = [])
     {
         $xml_content = '<?xml version="1.0" encoding="GBK"?>
@@ -58,7 +37,7 @@ class YangguangCompanySdk extends Sdk
         $xml_content = iconv('utf-8', 'gbk', $xml_content);
         $postData = array(
             'data' => $xml_content,
-            'sign' => md5($this->config->key . $xml_content),
+            'sign' => md5($this->config->token . $xml_content),
             'functionFlag' => 'INSURE',
             'interfaceFlag' => 'TCYG',
         );
@@ -66,7 +45,7 @@ class YangguangCompanySdk extends Sdk
         $header = ['Content-Type: application/x-www-form-urlencoded'];;
         $postQuery = http_build_query($postData);
         try {
-            $result = $this->curl_https($this->config->insure, $postQuery, $header, 'insure');
+            $result = $this->curl_https($this->config->insure, $postQuery, $header, __FUNCTION__);
         } catch (\Exception $e) {
             return $this->withError($e->getMessage());
         }
@@ -82,46 +61,6 @@ class YangguangCompanySdk extends Sdk
         $data = [
             'policyNo' => $policyObj['@attributes']['POLICYNO'],
             'transTime' => date("Y-m-d H:i:s")
-        ];
-        return $this->withData($data);
-
-    }
-
-    public function surrender(array $post)
-    {
-        $xml_content = '<?xml version="1.0" encoding="utf-8"?>
-        <INSURENCEINFO>
-          <USERNAME>AA8BB6106C85451C4DF5F09EAB9EBC5D</USERNAME>
-          <PASSWORD>1F6B1264ABFC025BE1F20946168B5438</PASSWORD>
-          <POLICYNO>'. $post['policyNo'] .'</POLICYNO>
-        </INSURENCEINFO>';
-        $xml_content = iconv('utf-8', 'gbk', $xml_content);
-        $postData = array(
-            'data' => $xml_content,
-            'sign' => md5($this->config->key . $xml_content),
-            'functionFlag' => 'SURRENDER',
-            'interfaceFlag' => 'TCYG',
-        );
-        $this->logger->surrender()->info("保司请求报文:" . $xml_content);
-        $header = ['Content-Type: application/x-www-form-urlencoded'];;
-        $postQuery = http_build_query($postData);
-        try {
-            $result = $this->curl_https($this->config->insure, $postQuery, $header, 'insure');
-        } catch (\Exception $e) {
-            return $this->withError($e->getMessage());
-        }
-        $this->logger->surrender()->info("保司响应报文:" . iconv("GBK", "UTF-8", $result));
-        $resultObj = $this->xml_to_array($result);
-        $orderObj = $resultObj['ORDER'];
-        $policyObj = $orderObj['POLICY'];
-        if ($orderObj['@attributes']['RETURN'] != 'true') {
-            $error = $orderObj['@attributes']['ERROR'] ?: "";
-            $error = !$error ? $policyObj['ERROR']['@attributes']['INFO'] : "未知异常,请联系管理员";
-            return $this->withError($error);
-        }
-        $data = [
-            'policyNo' => $post['policyNo'],
-            'transTime'=> date("Y-m-d H:i:s")
         ];
         return $this->withData($data);
     }
@@ -217,12 +156,5 @@ class YangguangCompanySdk extends Sdk
                 break;
         }
         return $type;
-    }
-
-    private function xml_to_array($xml)
-    {
-        $dataObj = simplexml_load_string($xml);
-        $dataObj = json_decode(str_replace("{}",'""',json_encode((array)$dataObj)),true);
-        return $dataObj;
     }
 }

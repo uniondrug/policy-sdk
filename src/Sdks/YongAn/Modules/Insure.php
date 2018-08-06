@@ -1,30 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: luzhouyu
- * Date: 18/7/29
- * Time: 下午11:04
- */
 
-namespace Uniondrug\PolicySdk\Modules;
+namespace Uniondrug\PolicySdk\Sdks\YongAn\Modules;
 
-
-use Uniondrug\PolicySdk\Sdk;
-
-/**
- * 永安
- * Class YonganCompanySdk
- * @package Uniondrug\PolicySdk\Modules
- */
-class YonganCompanySdk extends Sdk
+trait Insure
 {
-    const sdkName = "YONGAN";
-
-    public function __construct()
-    {
-        parent::__construct(self::sdkName);
-    }
-
     public function insure(array $post, &$extResponse = [])
     {
         $date = date('Y-m-d\TH:i:s+08:00');
@@ -74,41 +53,6 @@ class YonganCompanySdk extends Sdk
             'policyNo' => $returnObj['appInfoRes']['policyno'],
             'epolicyAddress' => urlencode(urldecode($returnObj['appInfoRes']['pdfurl'])),
             'transTime' => $returnObj['appInfoRes']['transTime'] ?: date("Y-m-d H:i:s"),
-        ];
-        return $this->withData($data);
-    }
-
-    public function surrender(array $post)
-    {
-        $date = date('Y-m-d\TH:i:s+08:00');
-        $postData = ['arg0' => [
-            "user" => "TCLY",
-            "password" => "1234567890",
-            "CCardBsnsTyp" => "TIT_TCLY",
-            "issuedate" => $date,
-            "policyno" => $post['policyNo'],
-        ]];
-        $url = $this->config->surrender;
-        $client = new \nusoap_client($url, 'wsdl');
-        $client->soap_defencoding = 'utf-8';
-        $client->decode_utf8 = false;
-        $client->xml_encoding = 'utf-8';
-        $this->logger->surrender()->info("保司请求报文:" . json_encode($postData, JSON_UNESCAPED_UNICODE));
-        $resultObj = $client->call('cancelapprequest', $postData);
-        $this->logger->surrender()->info("保司响应报文:" . json_encode($resultObj, JSON_UNESCAPED_UNICODE));
-        if ($err = $client->getError()) {
-            return $this->withError($err);
-        }
-        $returnObj = $resultObj['return'];
-        /*
-         * 投保失败
-         */
-        if ($returnObj['flag']) {
-            return $this->withError($returnObj['reason']);
-        }
-        $data = [
-            'policyNo' => $post['policyNo'],
-            'transTime' => $resultObj->transTime ?: date("Y-m-d H:i:s")
         ];
         return $this->withData($data);
     }
@@ -197,11 +141,5 @@ class YonganCompanySdk extends Sdk
                 break;
         }
         return $type;
-    }
-
-    private function ISODateString(string $date = "")
-    {
-        $date = $date ? strtotime($date) : time();
-        return date('Y-m-d\TH:i:s+08:00',$date);
     }
 }

@@ -1,28 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: luzhouyu
- * Date: 18/7/26
- * Time: 下午3:42
- */
 
-namespace Uniondrug\PolicySdk\Modules;
-use Uniondrug\PolicySdk\Sdk;
+namespace Uniondrug\PolicySdk\Sdks\TaiBao\Modules;
 
-/**
- * 太保保司xml报文
- * Class TaibaoCompanySdk
- * @package Uniondrug\PolicySdk\Modules
- */
-class TaibaoCompanySdk extends Sdk
+trait Insure
 {
-    const sdkName = "TAIBAO";
-
-    public function __construct()
-    {
-        parent::__construct(self::sdkName);
-    }
-
     public function insure(array $post, &$extResponse = [])
     {
         $xml_content = '<?xml version="1.0" encoding="UTF-8"?>
@@ -73,7 +54,7 @@ class TaibaoCompanySdk extends Sdk
         $header = ['Content-Type: application/x-www-form-urlencoded'];;
         $postQuery = http_build_query($postData);
         try {
-            $result = $this->curl_https($this->config->insure, $postQuery, $header, 'insure');
+            $result = $this->curl_https($this->config->insure, $postQuery, $header, __FUNCTION__);
         } catch (\Exception $e) {
             return $this->withError($e->getMessage());
         }
@@ -94,98 +75,10 @@ class TaibaoCompanySdk extends Sdk
             'billNo' => $dataObj->billNo
         ];
         return $this->withData($data);
-
-    }
-
-
-    public function surrender(array $post)
-    {
-        $xml_content = '<?xml version="1.0" encoding="UTF-8"?>
-        <request>
-            <head>
-                <partnerCode>SZTC</partnerCode>
-                <transactionCode>108003</transactionCode>
-                <messageId>' . $post['billNo'] . '</messageId>
-                <transactionEffectiveDate>' . date("Y-m-d H:i:s") . '</transactionEffectiveDate>
-                <user>' . $this->config->user . '</user>
-                <password>' . $this->config->password . '</password>
-            </head>
-            <body>
-                <PolicyCancellationRequest>
-                    <terminalNo>3010100</terminalNo>
-                    <PolicyCancellationBaseInfo>
-                        <policyNo>' . $post['policyNo'] . '</policyNo>
-                        <applicationReason>退保</applicationReason>
-                        <billType>0</billType>
-                        <billNo>' . $post['billNo'] . '</billNo>
-                        <contentType>1</contentType>
-                        <wifiFlag>1</wifiFlag>
-                    </PolicyCancellationBaseInfo>
-                     <Proposer>
-                        <customerName>N/A</customerName>
-                        <certificateType>3</certificateType>
-                        <certificateCode>N/A</certificateCode>
-                        <accountName/>
-                        <accountBank/>
-                        <account/>
-                    </Proposer>
-                    <EPolicyInfo>
-                        <messageFlag>0</messageFlag>
-                        <electronPolicyMobile/>
-                        <emailFlag>0</emailFlag>
-                        <electronPolicyEmail/>
-                    </EPolicyInfo>
-                </PolicyCancellationRequest>
-            </body>
-        </request>';
-        $postData = array(
-            'requestMessage' => $xml_content,
-            'documentProtocol' => 'CPIC_ECOM',
-            'messageRouter' => '3',
-            'tradingPartner' => 'SZTC',
-        );
-        $this->logger->surrender()->info("保司请求报文:" . $xml_content);
-        $header = ['Content-Type: application/x-www-form-urlencoded'];
-        $postQuery = http_build_query($postData);
-        try {
-            $result = $this->curl_https($this->config->surrender, $postQuery, $header, 'insure');
-        } catch (\Exception $e) {
-            return $this->withError($e->getMessage());
-        }
-        $this->logger->surrender()->info("保司响应报文:" . $result);
-        $resultObj = json_decode(str_replace("{}", '""', json_encode((array)simplexml_load_string($result))));
-        $messageStatusCode = $resultObj->head->responseCompleteMessageStatus->messageStatusCode;
-        $resultCode = $resultObj->body->PolicyCancellationResponse->resultCode;
-        if ($messageStatusCode == "000000" && (!$resultCode || in_array($resultCode, ["00", "02"]))) {
-            $data = [
-                'policyNo' => $post['policyNo'],
-                'transTime' => $resultObj->transTime ?: date("Y-m-d H:i:s")
-            ];
-            return $this->withData($data);
-        } else {
-            switch ($resultCode) {
-                case "01":
-                    $msg = "保单不存在";
-                    break;
-                case "03":
-                    $msg = "保单状态不是已生效不能做退保";
-                    break;
-                case "04":
-                    $msg = "保单已起保不能做退保";
-                    break;
-                case "05":
-                    $msg = "保单批改中不能做退保";
-                    break;
-                default:
-                    $msg = $resultObj->head->responseCompleteMessageStatus->messageStatusDescriptionList->messageStatusDescription->messageStatusSubDescription;
-                    break;
-            }
-            return $this->withError($msg);
-        }
     }
 
     /*
-      因子代码： 因子名称：
+     因子代码： 因子名称：
       HC000     订票日期
       HC001     航班目的地
       HC002     航班起飞时间
@@ -193,7 +86,7 @@ class TaibaoCompanySdk extends Sdk
       B4001     航班号
       B4002     乘机日期
       W3000     起始地点
-    */
+   */
     public function getDynamic($dynamicDto, $dynamicExt = [], $post = [])
     {
         $data = '<FactorList>';

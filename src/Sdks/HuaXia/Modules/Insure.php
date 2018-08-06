@@ -1,28 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: luzhouyu
- * Date: 18/7/25
- * Time: 下午11:31
- */
 
-namespace Uniondrug\PolicySdk\Modules;
-use Uniondrug\PolicySdk\Sdk;
+namespace Uniondrug\PolicySdk\Sdks\HuaXia\Modules;
 
-/**
- * 华夏保司
- * Class HuaXiaCompanySdk
- * @package Uniondrug\PolicySdk\Modules
- */
-class HuaXiaCompanySdk extends Sdk
+trait Insure
 {
-    const sdkName = "HUAXIA";
-
-    public function __construct()
-    {
-        parent::__construct(self::sdkName);
-    }
-
     public function insure(array $post, &$extResponse = [])
     {
         $postData = [
@@ -44,7 +25,7 @@ class HuaXiaCompanySdk extends Sdk
         $header = ['Content-Type: application/x-www-form-urlencoded'];
         $postQuery = http_build_query($postData);
         try {
-            $result = $this->curl_https($this->config->insure, $postQuery, $header, 'insure');
+            $result = $this->curl_https($this->config->insure, $postQuery, $header, __FUNCTION__);
         } catch (\Exception $e) {
             return $this->withError($e->getMessage());
         }
@@ -59,65 +40,6 @@ class HuaXiaCompanySdk extends Sdk
             'transTime' => $resultObj->transTime ?: date("Y-m-d H:i:s"),
         ];
         return $this->withData($data);
-    }
-
-    public function surrender(array $post)
-    {
-        $postData = [
-            'cooperation' => 'tongcheng',
-            'waterNo' => $post['waterNo'],
-            'policyNo' => $post['policyNo'],
-            'productCode' => $post['rationType'],
-            'cancelReason' => '接口保单注销'
-        ];
-        /*
-        * 组装报文
-        */
-        $postData = $this->createParams($postData);
-        $this->logger->surrender()->info("保司请求报文:" . json_encode($postData, JSON_UNESCAPED_UNICODE));
-        $header = ['Content-Type: application/x-www-form-urlencoded'];
-        $postQuery = http_build_query($postData);
-        try {
-            $result = $this->curl_https($this->config->surrender, $postQuery, $header, 'surrender');
-        } catch (\Exception $e) {
-            return $this->withError($e->getMessage());
-        }
-        $this->logger->surrender()->info("保司响应报文:" . $result);
-        $resultObj = json_decode($result);
-        if ($resultObj->retCode != "00") {
-            $msg = $resultObj->retDesc ?: $resultObj->returnMsg;
-            return $this->withError($msg);
-        }
-        $data = [
-            'policyNo' => $post['policyNo'],
-            'transTime' => $resultObj->transTime ?: date("Y-m-d H:i:s")
-        ];
-        return $this->withData($data);
-    }
-
-
-    private function createParams($postData)
-    {
-        $params = [
-            'uid' => 'adpt_tongcheng',
-            'timestamp' => str_replace(".", "", microtime(1)),
-            'nonce' => substr(md5(microtime(1)), 0, 20),
-            'data' => json_encode($postData, JSON_UNESCAPED_UNICODE)
-        ];
-        $params['signature'] = md5($this->getLinkString($params) . $this->config->key);
-        return $params;
-    }
-
-    private function getLinkString($params)
-    {
-        $params = array_filter($params); // 过滤空值
-        unset($params['signature']); // 去掉签名,如有
-        ksort($params);
-        $peers = array();
-        foreach ($params as $k => $v) {
-            $peers[] = "$k=$v";
-        }
-        return implode("&", $peers);
     }
 
     protected function getPolicyInfo($policyInfo, $extSchema = [], &$postData = [])

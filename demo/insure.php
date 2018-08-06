@@ -1,28 +1,21 @@
 <?php
 
+error_reporting(E_ALL);
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
 $policySdk = new Uniondrug\PolicySdk\PolicySdk();
 
-$json = require_once __DIR__ . DIRECTORY_SEPARATOR . 'doc' . DIRECTORY_SEPARATOR . 'insure.php';
-
-$instance = $policySdk->instance("YG");
-
-$YAConfig = [
-    "insure" => "http://tapi.yaic.com.cn/yaicservice/api/appservice?wsdl",
-    "surrender" => "http://tapi.yaic.com.cn/yaicservice/api/cancelappservice?wsdl"
-];
+$instance = $policySdk->instance("YANGGUANG");
 
 $YGConfig = [
     "insure" => "http://1.202.235.72:8082/ifp-TCYG/SyncInterface",
     "surrender" => "http://1.202.235.72:8082/ifp-TCYG/SyncInterface",
-    "key" => "jtyugewruuknh"
+    "token" => "jtyugewruuknh"
 ];
 
 $instance->setConfig($YGConfig);
 
-$data = json_decode($json,true);
+$data = ['policyNo'=>'86242985438308990977'];
 
-$result = $instance->insure($data);
-
-var_dump($result);
+$result = $instance->epolicy($data);

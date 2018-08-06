@@ -6,7 +6,7 @@ $policySdk = new Uniondrug\PolicySdk\PolicySdk();
 
 $json = require_once __DIR__ . DIRECTORY_SEPARATOR . 'doc' . DIRECTORY_SEPARATOR . 'surrender.php';
 
-$instance = $policySdk->instance("YG");
+$instance = $policySdk->instance("YANGGUANG");
 
 $YAConfig = [
     "insure" => "http://tapi.yaic.com.cn/yaicservice/api/appservice?wsdl",
