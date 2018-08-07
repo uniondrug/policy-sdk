@@ -3,8 +3,8 @@
 namespace Uniondrug\PolicySdk\Sdks\YongAn;
 
 use Uniondrug\PolicySdk\Sdk;
-use Uniondrug\PolicySdk\sdks\YongAn\Modules\Insure;
-use Uniondrug\PolicySdk\sdks\YongAn\Modules\Surrender;
+use Uniondrug\PolicySdk\Sdks\YongAn\Modules\Insure;
+use Uniondrug\PolicySdk\Sdks\YongAn\Modules\Surrender;
 
 class Base extends Sdk
 {

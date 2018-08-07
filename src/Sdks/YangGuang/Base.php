@@ -3,9 +3,9 @@
 namespace Uniondrug\PolicySdk\Sdks\YangGuang;
 
 use Uniondrug\PolicySdk\Sdk;
-use Uniondrug\PolicySdk\sdks\YangGuang\Modules\Epolicy;
-use Uniondrug\PolicySdk\sdks\YangGuang\Modules\Insure;
-use Uniondrug\PolicySdk\sdks\YangGuang\Modules\Surrender;
+use Uniondrug\PolicySdk\Sdks\YangGuang\Modules\Epolicy;
+use Uniondrug\PolicySdk\Sdks\YangGuang\Modules\Insure;
+use Uniondrug\PolicySdk\Sdks\YangGuang\Modules\Surrender;
 
 class Base extends Sdk
 {
