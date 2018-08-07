@@ -8,11 +8,9 @@ use Uniondrug\PolicySdk\sdks\YongAn\Modules\Surrender;
 
 class Base extends Sdk
 {
-    const sdkName = "YONGGAN";
-
-    public function __construct()
+    public function __construct($name)
     {
-        parent::__construct(self::sdkName);
+        parent::__construct($name);
     }
 
     /*
