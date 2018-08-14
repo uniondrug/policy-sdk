@@ -7,6 +7,7 @@ trait Insure
     public function insure(array $post, &$extResponse = [])
     {
         $waterNo = $this->createUniqueWaterNo();
+        $extResponse = ['waterNo' => $waterNo];
         $date = date('Y-m-d\TH:i:s+08:00');
         $postData = ['arg0' => [
             "baseInfo" => [
@@ -54,9 +55,6 @@ trait Insure
             'policyNo' => $returnObj['appInfoRes']['policyno'],
             'epolicyAddress' => urlencode(urldecode($returnObj['appInfoRes']['pdfurl'])),
             'transTime' => $returnObj['appInfoRes']['transTime'] ?: date("Y-m-d H:i:s"),
-        ];
-        $extResponse = [
-            'waterNo' => $waterNo
         ];
         return $this->withData($data);
     }
