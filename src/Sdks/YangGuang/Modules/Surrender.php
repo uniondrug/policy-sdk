@@ -8,8 +8,8 @@ trait Surrender
     {
         $xml_content = '<?xml version="1.0" encoding="utf-8"?>
         <INSURENCEINFO>
-          <USERNAME>AA8BB6106C85451C4DF5F09EAB9EBC5D</USERNAME>
-          <PASSWORD>1F6B1264ABFC025BE1F20946168B5438</PASSWORD>
+          <USERNAME>' . $this->config->user . '</USERNAME>
+          <PASSWORD>' . $this->config->password . '</PASSWORD>
           <POLICYNO>'. $post['policyNo'] .'</POLICYNO>
         </INSURENCEINFO>';
         $xml_content = iconv('utf-8', 'gbk', $xml_content);

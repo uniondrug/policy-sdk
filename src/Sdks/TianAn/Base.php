@@ -23,7 +23,8 @@ class Base extends Sdk
      */
     use Surrender;
 
-    protected function createRequestHead($cooperation,$token = null) {
+    protected function createRequestHead($cooperation, $token = null)
+    {
         $nonce = strtoupper(md5(uniqid(mt_rand(), true)));
         $timestamp = time();
         $requestHead = array(
@@ -31,16 +32,17 @@ class Base extends Sdk
             "nonce" => $nonce,
             "sign" => $this->getSign($nonce, $timestamp, $token),
             "timestamp" => $timestamp,
-            "tradeNo" => $timestamp.rand(10000, 99999),
+            "tradeNo" => $timestamp . rand(10000, 99999),
             "tradeDate" => date("Y-m-d H:i:s"),
         );
         return $requestHead;
     }
 
-    protected function getSign($nonce,$timestamp,$token){
+    protected function getSign($nonce, $timestamp, $token)
+    {
         $data = array($token, $nonce, $timestamp);
         sort($data, SORT_STRING);
-        $sign_orign = implode('',$data);
+        $sign_orign = implode('', $data);
         return sha1($sign_orign);
     }
 }

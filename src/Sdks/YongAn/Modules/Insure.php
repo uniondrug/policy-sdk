@@ -6,6 +6,7 @@ trait Insure
 {
     public function insure(array $post, &$extResponse = [])
     {
+        $waterNo = $this->createUniqueWaterNo();
         $date = date('Y-m-d\TH:i:s+08:00');
         $postData = ['arg0' => [
             "baseInfo" => [
@@ -15,7 +16,7 @@ trait Insure
                 "opercode" => "310084",
                 "isgrp" => "0",
                 // 以上为固定字段
-                "serialno" => $post['waterNo'],
+                "serialno" => $waterNo,
                 "rationcode" => $post['riskCode'],
                 "amt" => $post['totalPremium'],
                 "tapptm" => $date,
@@ -53,6 +54,9 @@ trait Insure
             'policyNo' => $returnObj['appInfoRes']['policyno'],
             'epolicyAddress' => urlencode(urldecode($returnObj['appInfoRes']['pdfurl'])),
             'transTime' => $returnObj['appInfoRes']['transTime'] ?: date("Y-m-d H:i:s"),
+        ];
+        $extResponse = [
+            'waterNo' => $waterNo
         ];
         return $this->withData($data);
     }

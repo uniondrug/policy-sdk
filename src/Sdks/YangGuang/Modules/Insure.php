@@ -8,8 +8,8 @@ trait Insure
     {
         $xml_content = '<?xml version="1.0" encoding="GBK"?>
         <INSURENCEINFO>
-          <USERNAME>AA8BB6106C85451C4DF5F09EAB9EBC5D</USERNAME>
-          <PASSWORD>1F6B1264ABFC025BE1F20946168B5438</PASSWORD>
+          <USERNAME>' . $this->config->user . '</USERNAME>
+          <PASSWORD>' . $this->config->password . '</PASSWORD>
           <ORDER>
             <ORDERID>'. $post['waterNo'] .'</ORDERID>
             <POLICYINFO>
@@ -18,7 +18,7 @@ trait Insure
               <POLICYNO/>
               <PRODUCTCODE>'. $post['riskCode'] .'</PRODUCTCODE>
               <PLANCODE/>
-              <AGREEMENTNO>U00002000069-03</AGREEMENTNO>
+              <AGREEMENTNO>' . $this->config->protocol . '</AGREEMENTNO>
               <INSURDATE>'. $post['inputDate'] .'</INSURDATE>
               <INSURSTARTDATE>'. $post['startDate'] .'</INSURSTARTDATE>
               <INSURENDDATE>'. $post['endDate'] .'</INSURENDDATE>
