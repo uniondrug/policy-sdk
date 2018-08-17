@@ -6,13 +6,13 @@ trait Surrender
 {
     public function surrender(array $post)
     {
-        $xml_content = '<?xml version="1.0" encoding="utf-8"?>
+        $xml_content = '<?xml version="1.0" encoding="GBK"?>
         <INSURENCEINFO>
           <USERNAME>' . $this->config->user . '</USERNAME>
           <PASSWORD>' . $this->config->password . '</PASSWORD>
           <POLICYNO>'. $post['policyNo'] .'</POLICYNO>
         </INSURENCEINFO>';
-        $xml_content = iconv('utf-8', 'gbk', $xml_content);
+        $xml_content = convert_encoding($xml_content, 'gbk');
         $postData = array(
             'data' => $xml_content,
             'sign' => md5($this->config->token . $xml_content),
@@ -27,8 +27,8 @@ trait Surrender
         } catch (\Exception $e) {
             return $this->withError($e->getMessage());
         }
-        $this->logger->surrender()->info("保司响应报文:" . iconv("GBK", "UTF-8", $result));
-        $resultObj = $this->xml_to_array($result);
+        $this->logger->surrender()->info("保司响应报文:" . $result);
+        $resultObj = xml_to_array($result);
         $orderObj = $resultObj['ORDER'];
         $policyObj = $orderObj['POLICY'];
         if ($orderObj['@attributes']['RETURN'] != 'true') {

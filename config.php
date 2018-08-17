@@ -9,9 +9,14 @@ return [
      */
     'Sdk:HUAXIA' => "HuaXia",
     /*
-     * 人保
+     * 人保Xml业务报文
+     * 酒店取消和旅游类产品
      */
-    'Sdk:RENBAO' => "RenBao",
+    'Sdk:RENBAOXML' => "RenBaoXml",
+    /*
+     * 人保Json业务报文
+     */
+    'Sdk:RENBAOJSON' => "RenBaoJson",
     /*
      * 太保
      */

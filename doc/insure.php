@@ -1,10 +1,10 @@
 <?php
 return '{
-  "waterNo": "2018080700003711",
+  "waterNo": "20180807000037112",
   "orderNo": "20180807122",
-  "startDate": "2018-08-10 04:02:13",
-  "endDate": "2018-08-11 04:02:13",
-  "totalPremium": "40.00",
+  "startDate": "2018-08-20 04:02:13",
+  "endDate": "2018-08-21 04:02:13",
+  "totalPremium": "5.00",
   "applyType": "D",
   "applyPeriod": 365,
   "projectCode": "100001",
@@ -46,11 +46,11 @@ return '{
     "trafficStartTime",
     "trafficEndTime"
   ],
-  "issuedDate": "2018-08-07 06:32:15",
-  "inputDate": "2018-08-07 06:32:15",
-  "rationType": "0231000614",
-  "riskCode": "0231000614",
-  "sumAssured": "0.00",
+  "issuedDate": "2018-08-16 06:32:15",
+  "inputDate": "2018-08-16 06:32:15",
+  "rationType": "ZBP000465a",
+  "riskCode": "ZBP",
+  "sumAssured": "100.00",
   "requestHead": {
     "companyId": "18",
     "nonce": "C75CC0801E6B827BC16947E645238D84",

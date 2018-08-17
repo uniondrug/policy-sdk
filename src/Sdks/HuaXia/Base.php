@@ -8,11 +8,6 @@ use Uniondrug\PolicySdk\Sdks\HuaXia\Modules\Surrender;
 
 class Base extends Sdk
 {
-    public function __construct($name)
-    {
-        parent::__construct($name);
-    }
-
     /*
      * 投保
      */

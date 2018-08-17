@@ -59,7 +59,7 @@ trait Insure
             return $this->withError($e->getMessage());
         }
         $this->logger->insure()->info("保司响应报文:" . $result);
-        $resultObj = json_decode(str_replace("{}", '""', json_encode((array)simplexml_load_string($result))));
+        $resultObj = xml_to_object($result);
         $messageStatusCode = $resultObj->head->responseCompleteMessageStatus->messageStatusCode;
         if ($messageStatusCode != "000000") {
             $msg = $resultObj->head->responseCompleteMessageStatus->messageStatusDescriptionList->messageStatusDescription->messageStatusSubDescription;

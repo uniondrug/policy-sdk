@@ -59,7 +59,7 @@ trait Surrender
             return $this->withError($e->getMessage());
         }
         $this->logger->surrender()->info("保司响应报文:" . $result);
-        $resultObj = json_decode(str_replace("{}", '""', json_encode((array)simplexml_load_string($result))));
+        $resultObj = xml_to_object($result);
         $messageStatusCode = $resultObj->head->responseCompleteMessageStatus->messageStatusCode;
         $resultCode = $resultObj->body->PolicyCancellationResponse->resultCode;
         if ($messageStatusCode == "000000" && (!$resultCode || in_array($resultCode, ["00", "02"]))) {

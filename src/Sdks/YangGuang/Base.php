@@ -9,11 +9,6 @@ use Uniondrug\PolicySdk\Sdks\YangGuang\Modules\Surrender;
 
 class Base extends Sdk
 {
-    public function __construct($name)
-    {
-        parent::__construct($name);
-    }
-
     /*
      *  投保
      */
@@ -28,11 +23,4 @@ class Base extends Sdk
      * 电子保单
      */
     use Epolicy;
-
-    protected function xml_to_array($xml)
-    {
-        $dataObj = simplexml_load_string($xml);
-        $dataObj = json_decode(str_replace("{}",'""',json_encode((array)$dataObj)),true);
-        return $dataObj;
-    }
 }

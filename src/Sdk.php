@@ -48,6 +48,24 @@ abstract class Sdk
     }
 
     /**
+     * 按照最大长度50位来处理
+     * 固定的4位毫秒值 + 6位时间值
+     * @param $length 要求长度
+     * @return string 流水号
+     */
+    public function createUniqueWaterNo($length = 50)
+    {
+        list($usec, $sec) = explode(" ", microtime());
+        $msec = str_pad(round($usec * 1000), 4, rand(0,9));
+        //  剩下需要获取的长度
+        $length -= (4 + 6);
+        $rand = substr(uniqid(), 7) . rand(str_pad(1, 14, 0), str_pad(9, 14, 9));
+        $waterNo = date('ymd') . substr(implode(NULL, array_map('ord', str_split($rand))), 0, $length);
+        $waterNo .= $msec;
+        return $waterNo;
+    }
+
+    /**
      * 失败
      * @param string $error
      * @param int $errno
@@ -103,9 +121,10 @@ abstract class Sdk
         $info = curl_getinfo($ch);
         curl_close($ch);
         //日志记录
-        $this->logger->{$name}()->info("保司接口响应时间(秒):".$info['total_time']);
         $http_code = $info['http_code'];
-        while ($times && in_array($http_code,['0','100'])) {
+        $this->logger->{$name}()->info("保司接口响应时间(秒):".$info['total_time']);
+        $this->logger->{$name}()->info("保司接口响应状态码:". $http_code);
+        while ($times && $http_code != 200) {
             $times--;
             return $this->curl_https($url, $post, $header, $name , $timeout, $times);
         }

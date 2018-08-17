@@ -6,7 +6,7 @@ trait Insure
 {
     public function insure(array $post, &$extResponse = [])
     {
-        $xml_content = '<?xml version="1.0" encoding="GBK"?>
+        $xml = '<?xml version="1.0" encoding="GBK"?>
         <INSURENCEINFO>
           <USERNAME>' . $this->config->user . '</USERNAME>
           <PASSWORD>' . $this->config->password . '</PASSWORD>
@@ -34,14 +34,14 @@ trait Insure
             </POLICYINFO>
           </ORDER>
         </INSURENCEINFO>';
-        $xml_content = iconv('utf-8', 'gbk', $xml_content);
+        $xml_content = convert_encoding($xml, 'gbk');
         $postData = array(
             'data' => $xml_content,
             'sign' => md5($this->config->token . $xml_content),
             'functionFlag' => 'INSURE',
             'interfaceFlag' => 'TCYG',
         );
-        $this->logger->insure()->info("保司请求报文:" . $xml_content);
+        $this->logger->insure()->info("保司请求报文:" . $xml);
         $header = ['Content-Type: application/x-www-form-urlencoded'];;
         $postQuery = http_build_query($postData);
         try {
@@ -49,8 +49,8 @@ trait Insure
         } catch (\Exception $e) {
             return $this->withError($e->getMessage());
         }
-        $this->logger->insure()->info("保司响应报文:" . iconv("GBK", "UTF-8", $result));
-        $resultObj = $this->xml_to_array($result);
+        $this->logger->insure()->info("保司响应报文:" . $result);
+        $resultObj = xml_to_array($result);
         $orderObj = $resultObj['ORDER'];
         $policyObj = $orderObj['POLICY'];
         if ($orderObj['@attributes']['RETURN'] != 'true') {
