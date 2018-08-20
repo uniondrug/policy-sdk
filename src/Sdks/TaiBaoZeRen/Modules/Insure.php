@@ -24,6 +24,7 @@ trait Insure
                         <plcPlanCode>' . $post['riskCode'] . '</plcPlanCode>
                         <plcStartDate>' . date("YmdH", strtotime($post['startDate'])) . '</plcStartDate>
                         <plcEndDate>' . date("YmdH", strtotime($post['endDate'])) . '</plcEndDate>
+                        <plcPremium>' . $post['totalPremium'] . '</plcPremium>
                         <plcAmount>' . $post['sumAssured'] . '</plcAmount>
                         <plcCopies>1</plcCopies>
                         <plcElcFlag>0</plcElcFlag>
