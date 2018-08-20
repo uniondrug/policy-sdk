@@ -1,6 +1,6 @@
 <?php
 
-namespace Uniondrug\PolicySdk\Sdks\TaiBao\Modules;
+namespace Uniondrug\PolicySdk\Sdks\TaiBaoYiWai\Modules;
 
 trait Surrender
 {
@@ -11,7 +11,7 @@ trait Surrender
             <head>
                 <partnerCode>SZTC</partnerCode>
                 <transactionCode>108003</transactionCode>
-                <messageId>' . $post['billNo'] . '</messageId>
+                <messageId>' . $post['extend']['billNo'] . '</messageId>
                 <transactionEffectiveDate>' . date("Y-m-d H:i:s") . '</transactionEffectiveDate>
                 <user>' . $this->config->user . '</user>
                 <password>' . $this->config->password . '</password>
@@ -23,7 +23,7 @@ trait Surrender
                         <policyNo>' . $post['policyNo'] . '</policyNo>
                         <applicationReason>退保</applicationReason>
                         <billType>0</billType>
-                        <billNo>' . $post['billNo'] . '</billNo>
+                        <billNo>' . $post['extend']['billNo'] . '</billNo>
                         <contentType>1</contentType>
                         <wifiFlag>1</wifiFlag>
                     </PolicyCancellationBaseInfo>

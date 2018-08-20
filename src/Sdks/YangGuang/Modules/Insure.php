@@ -41,7 +41,7 @@ trait Insure
             'functionFlag' => 'INSURE',
             'interfaceFlag' => 'TCYG',
         );
-        $this->logger->insure()->info("保司请求报文:" . $xml);
+        $this->logger->insure()->info("保司请求报文:" . convert_encoding($xml));
         $header = ['Content-Type: application/x-www-form-urlencoded'];;
         $postQuery = http_build_query($postData);
         try {
@@ -49,7 +49,7 @@ trait Insure
         } catch (\Exception $e) {
             return $this->withError($e->getMessage());
         }
-        $this->logger->insure()->info("保司响应报文:" . $result);
+        $this->logger->insure()->info("保司响应报文:" . convert_encoding($result));
         $resultObj = xml_to_array($result);
         $orderObj = $resultObj['ORDER'];
         $policyObj = $orderObj['POLICY'];

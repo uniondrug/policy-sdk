@@ -12,5 +12,6 @@ return '{
   "auth": [],
   "rationType": "TC001",
   "riskCode": "TC001",
-  "policyNo": "PZBP20184419Q000E00092"
+  "policyNo": "ASHH41059818EAAA75R91",
+  "extend" : {}
 }';

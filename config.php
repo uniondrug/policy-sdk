@@ -10,17 +10,22 @@ return [
     'Sdk:HUAXIA' => "HuaXia",
     /*
      * 人保Xml业务报文
-     * 酒店取消和旅游类产品
+     * 酒店取消和旅游类
      */
     'Sdk:RENBAOXML' => "RenBaoXml",
     /*
      * 人保Json业务报文
+     * 航空和机票类
      */
     'Sdk:RENBAOJSON' => "RenBaoJson",
     /*
-     * 太保
+     * 太保意外险
      */
-    'Sdk:TAIBAO' => "TaiBao",
+    'Sdk:TAIBAO_YIWAI' => "TaiBaoYiWai",
+    /*
+     * 太保责任险
+     */
+    'Sdk:TAIBAO_ZEREN' => "TaiBaoZeRen",
     /*
      * 天安
      */

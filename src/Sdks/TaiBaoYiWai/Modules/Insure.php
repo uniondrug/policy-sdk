@@ -1,6 +1,6 @@
 <?php
 
-namespace Uniondrug\PolicySdk\Sdks\TaiBao\Modules;
+namespace Uniondrug\PolicySdk\Sdks\TaiBaoYiWai\Modules;
 
 trait Insure
 {

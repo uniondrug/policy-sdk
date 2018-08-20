@@ -1,9 +1,9 @@
 <?php
 return '{
-  "waterNo": "20180807000037112",
-  "orderNo": "20180807122",
-  "startDate": "2018-08-20 04:02:13",
-  "endDate": "2018-08-21 04:02:13",
+  "waterNo": "20180807000037114",
+  "orderNo": "201808071221",
+  "startDate": "2018-09-01 04:02:13",
+  "endDate": "2018-09-02 04:02:13",
   "totalPremium": "5.00",
   "applyType": "D",
   "applyPeriod": 365,
@@ -29,10 +29,10 @@ return '{
   ],
   "dynamicDto": {
     "ticketNo": "T398",
-    "trafficStartTime": "2018-08-10 04:02:13",
-    "trafficEndTime": "2018-08-11 04:02:13",
-    "departure": "厦门",
-    "destination": "石家庄"
+    "trafficStartTime": "2018-09-01 04:02:13",
+    "trafficEndTime": "2018-09-02 04:02:13",
+    "departure": "PVG",
+    "destination": "XIY"
   },
   "insuranceExt": [
     "orderNo"
@@ -46,17 +46,17 @@ return '{
     "trafficStartTime",
     "trafficEndTime"
   ],
-  "issuedDate": "2018-08-16 06:32:15",
-  "inputDate": "2018-08-16 06:32:15",
-  "rationType": "ZBP000465a",
-  "riskCode": "ZBP",
+  "issuedDate": "2018-08-21 17:32:15",
+  "inputDate": "2018-08-21 17:32:15",
+  "rationType": "PN130763001800000025",
+  "riskCode": "PN130763001800000025",
   "sumAssured": "100.00",
   "requestHead": {
     "companyId": "18",
     "nonce": "C75CC0801E6B827BC16947E645238D84",
     "sign": "a8359a30ee2e6e45f7355c662693ad23f6e3808f",
     "timestamp": 1533623535,
-    "tradeDate": "2018-08-07 06:32:15"
+    "tradeDate": "2018-08-21 06:32:15"
   },
   "comCode": null
 }';
