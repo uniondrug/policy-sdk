@@ -10,20 +10,20 @@ trait Epolicy
      */
     public function epolicy(array $post)
     {
-        $xml_content = '<?xml version="1.0" encoding="GBK"?>
+        $xml = '<?xml version="1.0" encoding="GBK"?>
         <INSURENCEINFO>
           <USERNAME>' . $this->config->user . '</USERNAME>
           <PASSWORD>' . $this->config->password . '</PASSWORD>
           <POLICYNO>'. $post['policyNo'] .'</POLICYNO>
         </INSURENCEINFO>';
-        $xml_content = convert_encoding($xml_content, 'gbk');
+        $xml_content = convert_encoding($xml, 'gbk');
         $postData = array(
             'data' => $xml_content,
             'sign' => md5($this->config->token . $xml_content),
             'functionFlag' => 'EPOLICY',
             'interfaceFlag' => 'TCYG',
         );
-        $this->logger->epolicy()->info("保司请求报文:" . $xml_content);
+        $this->logger->epolicy()->info("保司请求报文:" . convert_encoding($xml));
         $header = ['Content-Type: application/x-www-form-urlencoded'];;
         $postQuery = http_build_query($postData);
         try {

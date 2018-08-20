@@ -6,20 +6,20 @@ trait Surrender
 {
     public function surrender(array $post)
     {
-        $xml_content = '<?xml version="1.0" encoding="GBK"?>
+        $xml = '<?xml version="1.0" encoding="GBK"?>
         <INSURENCEINFO>
           <USERNAME>' . $this->config->user . '</USERNAME>
           <PASSWORD>' . $this->config->password . '</PASSWORD>
           <POLICYNO>'. $post['policyNo'] .'</POLICYNO>
         </INSURENCEINFO>';
-        $xml_content = convert_encoding($xml_content, 'gbk');
+        $xml_content = convert_encoding($xml, 'gbk');
         $postData = array(
             'data' => $xml_content,
             'sign' => md5($this->config->token . $xml_content),
             'functionFlag' => 'SURRENDER',
             'interfaceFlag' => 'TCYG',
         );
-        $this->logger->surrender()->info("保司请求报文:" . $xml_content);
+        $this->logger->surrender()->info("保司请求报文:" . convert_encoding($xml));
         $header = ['Content-Type: application/x-www-form-urlencoded'];;
         $postQuery = http_build_query($postData);
         try {
@@ -27,7 +27,7 @@ trait Surrender
         } catch (\Exception $e) {
             return $this->withError($e->getMessage());
         }
-        $this->logger->surrender()->info("保司响应报文:" . $result);
+        $this->logger->surrender()->info("保司响应报文:" . convert_encoding($result));
         $resultObj = xml_to_array($result);
         $orderObj = $resultObj['ORDER'];
         $policyObj = $orderObj['POLICY'];
