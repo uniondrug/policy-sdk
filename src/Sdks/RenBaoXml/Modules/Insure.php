@@ -34,8 +34,13 @@ trait Insure
                             <Schemes>
                                 <Scheme>
                                     <SchemeCode>1</SchemeCode>
-                                    <SchemeAmount>' . $post['sumAssured'] . '</SchemeAmount>
-                                    <SchemePremium>' . $post['totalPremium'] . '</SchemePremium>
+                                    <SchemeAmount>' . ($post['sumAssured'] / 2) . '</SchemeAmount>
+                                    <SchemePremium>' . ($post['totalPremium'] / 2) . '</SchemePremium>
+                                </Scheme>
+                                 <Scheme>
+                                    <SchemeCode>2</SchemeCode>
+                                    <SchemeAmount>' . ($post['sumAssured'] / 2) . '</SchemeAmount>
+                                    <SchemePremium>' . ($post['totalPremium'] / 2) . '</SchemePremium>
                                 </Scheme>
                             </Schemes>
                         </InsuredPlan>
