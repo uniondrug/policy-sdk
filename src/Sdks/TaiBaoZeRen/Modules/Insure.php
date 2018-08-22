@@ -65,7 +65,7 @@ trait Insure
         $dataObj = $resultObj->body->entity->plcBase;
         $data = [
             'policyNo' => $dataObj->plcNo,
-            'epolicyAddress' => urlencode(urldecode($dataObj->epolicyInfo)),
+            'epolicyAddress' => urlencode($dataObj->epolicyInfo),
             'transTime' => $dataObj->effectiveDate ?: date("Y-m-d H:i:s"),
         ];
         $extResponse = [
