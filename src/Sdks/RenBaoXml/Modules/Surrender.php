@@ -8,7 +8,7 @@ trait Surrender
     {
         $waterNo = $this->createUniqueWaterNo();
         $Md5Value = md5($waterNo . $post['policyNo']);
-        $xml_content = '<?xml version="1.0" encoding="GB2312" standalone="yes"?>
+        $xml_content = '<?xml version="1.0" encoding="utf-8"?>
             <PolicyEndorsement>
                 <Head>
                     <UUID>' . $waterNo . '</UUID>
@@ -25,7 +25,7 @@ trait Surrender
              </PolicyEndorsement>';
         $postData = [
             'interfaceNo' => '001003',
-            'datas' => convert_encoding($xml_content, 'GB2312')
+            'datas' => $xml_content
         ];
         $url = $this->config->surrender;
         $client = new \nusoap_client($url, 'wsdl');

@@ -1,6 +1,6 @@
 <?php
 return '{
-  "waterNo": "20180807000037114",
+  "waterNo": "2018080700003711434",
   "orderNo": "201808071221",
   "startDate": "2018-09-01 04:02:13",
   "endDate": "2018-09-02 04:02:13",
@@ -48,8 +48,8 @@ return '{
   ],
   "issuedDate": "2018-08-21 17:32:15",
   "inputDate": "2018-08-21 17:32:15",
-  "rationType": "PN130763001800000025",
-  "riskCode": "PN130763001800000025",
+  "rationType": "ZBP000465a",
+  "riskCode": "ZBP",
   "sumAssured": "100.00",
   "requestHead": {
     "companyId": "18",

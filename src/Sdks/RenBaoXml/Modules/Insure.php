@@ -10,7 +10,7 @@ trait Insure
         $SumAmount = $post['sumAssured'] * count($post['insuredList']);
         $SumPremium = $post['totalPremium'] * count($post['insuredList']);
         $Md5Value = md5($waterNo . $SumPremium . $this->config->token);
-        $xml_content = '<?xml version="1.0" encoding="GB2312" standalone="yes"?>
+        $xml_content = '<?xml version="1.0" encoding="utf-8"?>
             <ApplyInfo>
                 <GeneralInfo>
                     <UUID>' . $waterNo . '</UUID> 
@@ -51,7 +51,7 @@ trait Insure
             </ApplyInfo>';
         $postData = [
             'interfaceNo' => '001001',
-            'datas' => convert_encoding($xml_content, 'GB2312')
+            'datas' => $xml_content
         ];
         $url = $this->config->insure;
         $client = new \nusoap_client($url, 'wsdl');
