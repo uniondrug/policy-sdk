@@ -8,9 +8,9 @@ trait Surrender
     {
         $date = date('Y-m-d\TH:i:s+08:00');
         $postData = ['arg0' => [
-            "user" => "TCLY",
-            "password" => "1234567890",
-            "CCardBsnsTyp" => "TIT_TCLY",
+            "user" => $this->config->user,
+            "password" => $this->config->password,
+            "CCardBsnsTyp" => $this->config->salesSource,
             "issuedate" => $date,
             "policyno" => $post['policyNo'],
         ]];

@@ -11,10 +11,10 @@ trait Insure
         $date = date('Y-m-d\TH:i:s+08:00');
         $postData = ['arg0' => [
             "baseInfo" => [
-                "user" => "TCLY",
-                "password" => "1234567890",
-                "ccardbsnstyp" => "TIT_TCLY",
-                "opercode" => "310084",
+                "user" => $this->config->user,
+                "password" => $this->config->password,
+                "ccardbsnstyp" => $this->config->salesSource,
+                "opercode" => $this->config->salesCode,
                 "isgrp" => "0",
                 // 以上为固定字段
                 "serialno" => $waterNo,
