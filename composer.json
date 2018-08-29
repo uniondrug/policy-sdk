@@ -19,6 +19,13 @@
   "autoload": {
     "psr-4": {
       "Uniondrug\\PolicySdk\\": "src/"
-    }
-  }
+    },
+    "files": [
+      "helpers.php"
+    ]
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "prefer-stable": true
 }

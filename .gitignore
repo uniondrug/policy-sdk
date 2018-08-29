@@ -6,3 +6,4 @@
 /vendor/*
 !**/.gitkeep
 php_errors.log
+/demo/*
