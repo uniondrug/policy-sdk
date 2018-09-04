@@ -19,7 +19,7 @@ trait Insure
             <body>
                 <PolicyApplyRequest>
                     <PolicyBaseInfo>
-                        <terminalNo>3010100</terminalNo>
+                        <terminalNo>' . $post['comCode'] . '</terminalNo>
                         <planCode>' . $post['riskCode'] . '</planCode>
                         <groupInsuranceFlag>S</groupInsuranceFlag>
                         <billType>0</billType>

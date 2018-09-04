@@ -31,11 +31,11 @@ class PolicySdk
 
     /**
      * 实例化一个保司对象
-     * @param $cooperation
+     * @param $SDK
      */
-    public function instance($cooperation)
+    public function instance($SDK)
     {
-        $key = "Sdk:" . strtoupper($cooperation);
+        $key = "Sdk:" . strtoupper($SDK);
         //  从上个实例中读取
         if (isset(self::$_modules[$key])) {
             return self::$_modules[$key];
@@ -50,7 +50,7 @@ class PolicySdk
         } catch (\Throwable $e) {
         }
         // 3. 未定义的SDK服务
-        throw new \Exception("SDK包中未找到'{$cooperation}'定义");
+        throw new \Exception("SDK包中未找到'{$SDK}'定义");
     }
 
     /**
