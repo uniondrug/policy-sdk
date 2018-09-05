@@ -28,7 +28,7 @@ trait Insure
             "appInfos" => [
                 "appBaseInfo" => $this->getPolicyInfo($post['policyInfo'], $post['policyExt']),
                 // 被保人
-                "insuredInfos" => $this->getInsuredList($post['insuredList'], $post['insuredExt'], $post['policyInfo']['policyMobile']),
+                "insuredInfos" => $this->getInsuredList($post['insuredList'], $post['insuredExt']),
                 //航班信息
                 "propertyInfos" => $this->getDynamic($post['dynamicDto'], $post['dynamicExt'])
             ]
@@ -66,12 +66,12 @@ trait Insure
             'apptype' => $this->convertIdentifyType($policyInfo['policyIdentifyType']),
             'appname' => $policyInfo['policyName'],
             'appid' => $policyInfo['policyIdentifyNumber'],
-            'appphone' => "13810000000",
+            'appphone' => $policyInfo['policyMobile'] ?: "",
             'appbirthday' => date("Y-m-d", strtotime($policyInfo['policyBirthday'])),
         ];
     }
 
-    protected function getInsuredList($insuredList, $extSchema = [], $policyMobile = "")
+    protected function getInsuredList($insuredList, $extSchema = [])
     {
         $data = [];
         foreach ($insuredList as $value) {
@@ -82,7 +82,8 @@ trait Insure
                 'pid' => $value['insuredIdentifyNumber'],
                 'pbirthday' => date("Y-m-d", strtotime($value['insuredBirthday'])),
                 'psex' => $value['insuredSex'] == "01" ? 1 : 2,
-                'ptel' => $value['insuredMobile'] ?: $policyMobile
+                'pphone' => "13810000000",
+                'ptel' => "13810000000"
             ];
         }
         return $data[0];
