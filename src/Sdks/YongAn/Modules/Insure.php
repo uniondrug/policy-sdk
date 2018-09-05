@@ -66,7 +66,7 @@ trait Insure
             'apptype' => $this->convertIdentifyType($policyInfo['policyIdentifyType']),
             'appname' => $policyInfo['policyName'],
             'appid' => $policyInfo['policyIdentifyNumber'],
-            'appphone' => $policyInfo['policyMobile'] ?: "",
+            'appphone' => "13810000000",
             'appbirthday' => date("Y-m-d", strtotime($policyInfo['policyBirthday'])),
         ];
     }
