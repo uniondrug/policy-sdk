@@ -13,5 +13,6 @@ return '{
   "rationType": "TC001",
   "riskCode": "TC001",
   "policyNo": "ASHH41059818EAAA75R91",
-  "extend" : {}
+  "extend" : {},
+  "comCode": null
 }';

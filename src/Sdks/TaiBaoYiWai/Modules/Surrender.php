@@ -18,7 +18,7 @@ trait Surrender
             </head>
             <body>
                 <PolicyCancellationRequest>
-                    <terminalNo>3010100</terminalNo>
+                    <terminalNo>' . $post['comCode'] . '</terminalNo>
                     <PolicyCancellationBaseInfo>
                         <policyNo>' . $post['policyNo'] . '</policyNo>
                         <applicationReason>退保</applicationReason>
