@@ -50,7 +50,7 @@ trait Insure
         return [
             'applicantName' => $policyInfo['policyName'],
             'identifyType' => $policyInfo['policyIdentifyType'],
-            'identifyNumber' => strtoupper($policyInfo['policyIdentifyNumber']),
+            'identifyNumber' => $policyInfo['policyIdentifyNumber'],
             'mobile' => $policyInfo['policyMobile'],
             'birthday' => date("Y-m-d",strtotime($policyInfo['policyBirthday'])),
             'sex' => $policyInfo['policySex'],
@@ -65,7 +65,7 @@ trait Insure
             $data[] = [
                 'insuredName' => $value['insuredName'],
                 'identifyType' => $value['insuredIdentifyType'],
-                'identifyNumber' => strtoupper($value['insuredIdentifyNumber']),
+                'identifyNumber' => $value['insuredIdentifyNumber'],
                 'mobile' => $value['insuredMobile'],
                 'birthday' => date("Y-m-d",strtotime($value['insuredBirthday'])),
                 'sex' => $value['insuredSex'],

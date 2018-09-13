@@ -65,7 +65,7 @@ trait Insure
             'businessid' => 1,
             'apptype' => $this->convertIdentifyType($policyInfo['policyIdentifyType']),
             'appname' => $policyInfo['policyName'],
-            'appid' => $policyInfo['policyIdentifyNumber'],
+            'appid' => strtoupper($policyInfo['policyIdentifyNumber']),
             'appphone' => $policyInfo['policyMobile'] ?: "",
             'appbirthday' => date("Y-m-d", strtotime($policyInfo['policyBirthday'])),
         ];
@@ -79,7 +79,7 @@ trait Insure
                 'ptype' => $this->convertIdentifyType($value['insuredIdentifyType']),
                 'apprel' => '601005',   //  本人
                 'pname' => $value['insuredName'],
-                'pid' => $value['insuredIdentifyNumber'],
+                'pid' => strtoupper($value['insuredIdentifyNumber']),
                 'pbirthday' => date("Y-m-d", strtotime($value['insuredBirthday'])),
                 'psex' => $value['insuredSex'] == "01" ? 1 : 2,
                 'pphone' => "13810000000",
