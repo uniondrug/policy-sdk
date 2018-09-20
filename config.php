@@ -38,4 +38,8 @@ return [
      * 永安
      */
     'Sdk:YONGAN' => "YongAn",
+    /*
+     * 国寿
+     */
+    'Sdk:GUOSHOU' => "GuoShou",
 ];
