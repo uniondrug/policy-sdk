@@ -3,11 +3,17 @@
 namespace Uniondrug\PolicySdk\Sdks\HuaXia;
 
 use Uniondrug\PolicySdk\Sdk;
+use Uniondrug\PolicySdk\Sdks\HuaXia\Modules\EquityClaim;
 use Uniondrug\PolicySdk\Sdks\HuaXia\Modules\Insure;
 use Uniondrug\PolicySdk\Sdks\HuaXia\Modules\Surrender;
 
 class Base extends Sdk
 {
+    /*
+     * 华夏权益理赔接口只能支持最大长度20位
+     */
+    const water_no_length = 20;
+
     /*
      * 投保
      */
@@ -17,6 +23,11 @@ class Base extends Sdk
      * 退保
      */
     use Surrender;
+
+    /*
+     * 权益理赔
+     */
+    use EquityClaim;
 
     protected function createParams($postData)
     {
@@ -40,5 +51,10 @@ class Base extends Sdk
             $peers[] = "$k=$v";
         }
         return implode("&", $peers);
+    }
+
+    public function createUniqueWaterNo()
+    {
+        return parent::createUniqueWaterNo(self::water_no_length);
     }
 }
