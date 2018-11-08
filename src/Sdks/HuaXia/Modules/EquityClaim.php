@@ -75,9 +75,8 @@ trait EquityClaim
         $postData['Body']=array_merge($postData['Body'], $data);
     }
 
-
     /**
-     * 客户信息详情
+     * 客户信息
      */
     private function getClientInfo($post,&$postData=[]){
         foreach($post['BillInfos'] as $model){
