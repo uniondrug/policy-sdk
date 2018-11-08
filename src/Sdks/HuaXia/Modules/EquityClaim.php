@@ -40,8 +40,9 @@ trait EquityClaim
         $this->logger->equityClaim()->info("保司请求报文:" . $postJson);
         $header[] = 'Content-Type: application/json';
         $header[] = 'MethodName: llylClaim';
+        $timeout = 60;
         try {
-            $result = $this->curl_https($this->config->equityClaim, $postJson, $header, __FUNCTION__);
+            $result = $this->curl_https($this->config->equityClaim, $postJson, $header, __FUNCTION__ ,$timeout);
         } catch (\Exception $e) {
             return $this->withError($e->getMessage());
         }
