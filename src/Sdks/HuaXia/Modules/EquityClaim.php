@@ -11,10 +11,9 @@ trait EquityClaim
 {
     public function equityClaim(array $post)
     {
-        $transNo =$this->createUniqueWaterNo();
         $postData['Head'] = [
             "ServiceID"=> "medUnion001",
-            "TransNo"=> $transNo,
+            "TransNo"=> $post['transNo'],
             "FromSystemkey"=> "zt",
             "TransDate"=> date("Y-m-d"),
             "TransTime"=> date("H-i-s"),
@@ -26,7 +25,7 @@ trait EquityClaim
             "BatchPersonNum"=> $post['totalCts'],
             "BatchSumAmount"=> $post['totalAmt'],
             "BatchSumNum"=> $post['totalTransNum'],
-            "TransNo"=> $transNo,
+            "TransNo"=> $post['transNo'],
             "TransNum"=> $post['transNum'],
             "TransPersonNum"=> $post['transPersonNum'],
             "TransAmount"=> $post['transAmount'],

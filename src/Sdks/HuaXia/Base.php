@@ -5,6 +5,7 @@ namespace Uniondrug\PolicySdk\Sdks\HuaXia;
 use Uniondrug\PolicySdk\Sdk;
 use Uniondrug\PolicySdk\Sdks\HuaXia\Modules\EquityClaim;
 use Uniondrug\PolicySdk\Sdks\HuaXia\Modules\Insure;
+use Uniondrug\PolicySdk\Sdks\HuaXia\Modules\QueryClaim;
 use Uniondrug\PolicySdk\Sdks\HuaXia\Modules\Surrender;
 
 class Base extends Sdk
@@ -28,6 +29,11 @@ class Base extends Sdk
      * 权益理赔
      */
     use EquityClaim;
+
+    /*
+     * 权益理赔审核
+     */
+    use QueryClaim;
 
     protected function createParams($postData)
     {
