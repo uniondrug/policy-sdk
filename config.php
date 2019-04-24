@@ -38,4 +38,8 @@ return [
      * 永安
      */
     'Sdk:YONGAN' => "YongAn",
+    /*
+    * 人保药品保业务
+    */
+    'Sdk:RENBAODRUG' => "RenBaoDrug",
 ];
