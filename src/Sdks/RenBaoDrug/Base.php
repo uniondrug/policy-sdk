@@ -4,8 +4,6 @@ namespace Uniondrug\PolicySdk\Sdks\RenBaoDrug;
 
 use Uniondrug\PolicySdk\Sdk;
 use Uniondrug\PolicySdk\Sdks\RenBaoDrug\Modules\Insure;
-use Uniondrug\PolicySdk\Sdks\RenBaoDrug\Modules\Surrender;
-
 class Base extends Sdk
 {
     /*
