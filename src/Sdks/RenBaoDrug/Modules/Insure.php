@@ -42,7 +42,6 @@ trait Insure
             </LiabInfo>
             <Applicant>
                 <AppliName>' . $post['policyName'] . '</AppliName>
-                <AppliSex>' . $post['policySex'] . '</AppliSex>
                 <AppliIdType>' . $this->convertIdentifyType($post['policyIdentifyType']) . '</AppliIdType>
                 <AppliIdNo>' . $post['policyIdentifyNumber'] . '</AppliIdNo>
                 <AppliIdentity>' . $post['policyIdentity'] . '</AppliIdentity>
@@ -53,10 +52,8 @@ trait Insure
                 <Insured>
                     <InsuredSeqNo>1</InsuredSeqNo>
                     <InsuredName>' . $post['insuredName'] . '</InsuredName>
-                    <InsuredSex>' . $post['insuredSex'] . '</InsuredSex>
                     <InsuredIdType>' .$this->convertIdentifyType($post['insuredIdentifyType'])  . '</InsuredIdType>
                     <InsuredIdNo>' . $post['insuredIdentifyNumber'] . '</InsuredIdNo>
-                    <InsuredBirthday>' . $post['insuredBirthday'] . '</InsuredBirthday>
                     <InsuredIdMobile>' . $post['insuredIdMobile'] . '</InsuredIdMobile>
                     <InsuredAddress>' . $post['insuredAddress'] . '</InsuredAddress>
                 </Insured>
