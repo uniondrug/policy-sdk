@@ -1,7 +1,7 @@
 <?php
 return '{
-  "transactionNo": "1904268178",
-  "aiBaoTransactionNo": "ABXCAR181556268266846074369837",
+  "transactionNo": "1904287014",
+  "aiBaoTransactionNo": "ABXCAR181556441510730616047718",
   "returnUrl": "http://www.uniondrugcar.com/api/order/test",
   "notifyUrl": "http://backend.insurance.business.turboradio.cn:80/api/notify/notify",
   "insurantBirthday": "1994-02-12",
@@ -19,5 +19,5 @@ return '{
   "province": "110000",
   "city": "110100",
   "town": "110101",
-  "address": "测试"
+  "receiveAddress": "测试"
 }';
