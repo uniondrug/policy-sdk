@@ -23,6 +23,7 @@ trait Insure
             <EndDate>' . date('Y-m-d', strtotime($post['endDate'])) . '</EndDate>
             <StartHour>' . date('H', strtotime($post['startDate'])) . '</StartHour>
             <EndHour>' . date('H', strtotime($post['endDate'])) . '</EndHour>
+            <startTime>' . date('i:s', strtotime($post['startDate'])) . '</startTime>
             <SumAmount>' . $post['sumAmount'] . '</SumAmount>
             <SumPremium>' . $post['sumPremium'] . '</SumPremium>
             <ArguSolution>1</ArguSolution>

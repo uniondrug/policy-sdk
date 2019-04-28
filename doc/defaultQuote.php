@@ -1,0 +1,26 @@
+<?php
+return '{
+  "transactionNo": "1904267166",
+  "aiBaoTransactionNo": "ABXCAR181556263606744720496510",
+  "insuredBirthday": "1994-02-12",
+  "insuredIdNo": "411302199402126050",
+  "insuredIdType": "01",
+  "insuredIdName": "吕忠邻",
+  "insuredSex": "1",
+  "insuredMobile": "13764853427",
+  "mobileHolederName": "吕忠邻",
+  "mobileHolederIdType": "01",
+  "mobileHolederIdNo": "411302199402126050",
+  "carOwnerBirthday": "1994-02-12",
+  "carOwnerIdNo": "411302199402126050",
+  "carOwnerIdType": "01",
+  "carOwnerIdName": "吕忠邻",
+  "carOwnerSex": "1",
+  "carOwnerMobile": "13764853427",
+  "vehicleCode": "4028b2b65a3aee87015a3fad519c11d6",
+  "frameNo": "LVRHDFAL4HN143877",
+  "engineNo": "3460312",
+  "enrollDate": "2017-12-27",
+  "chgOwnerFlag": "0",
+  "isLoanVehicleFlag": "0"
+}';

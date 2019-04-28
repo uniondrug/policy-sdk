@@ -42,4 +42,8 @@ return [
     * 人保药品保业务
     */
     'Sdk:RENBAODRUG' => "RenBaoDrug",
+    /*
+    * 爱保车险
+    */
+    'Sdk:AIBAO' => "AiBao",
 ];
