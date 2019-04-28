@@ -33,13 +33,13 @@ trait OrderCheck
                     "mobileHolederName" => $post['mobileHolederName'],
                     "mobileHolederIdType" => $this->convertIdentifyType($post['mobileHolederIdType']) ,
                     "mobileHolederIdNo" => $post['mobileHolederIdNo'],
-                    "email" => $post['email'] ?? '',
-                    "address" => $post['address'] ?? '',
+                    "email" => $post['insurantEmail'] ?? '',
+                    "address" => $post['insurantAddress'] ?? '',
                 ],
                 "destinationInfo" => [
                     "idName" => $post['receiveIdName'],
                     "mobile" => $post['receiveMobile'],
-                    "email" => $post['email'] ?? '',
+                    "email" => $post['receiveEmail'] ?? '',
                     "sendDate" => $post['sendDate'] ?? '',
                     "invoice" => $post['invoice'],
                     "invoiceFlag" => $post['invoiceFlag'] ?? '',
@@ -48,7 +48,7 @@ trait OrderCheck
                     "province" => $post['province'],
                     "city" => $post['city'],
                     "town" => $post['town'],
-                    "address" => $post['address'],
+                    "address" => $post['receiveAddress'],
                     "readingCompletedTime" => $post['readingCompletedTime'] ?? '',
                     "agreeAuthorizeTime" => $post['agreeAuthorizeTime'] ?? '',
                     "checkedTime" => $post['checkedTime'] ?? '',
@@ -67,20 +67,5 @@ trait OrderCheck
         $this->logger->orderCheck()->info("保司响应报文:" . $result);
         $resultObj = json_decode($result,true);
         return $resultObj;
-/*        if ($resultObj->head->errorCode != "0000") {
-            return $this->withError($resultObj->head->errorMsg);
-        }
-        $data = [
-            'aiBaoTransactionNo' => $resultObj->head->aiBaoTransactionNo,
-            'transactionNo' => $resultObj->head->transactionNo,
-            'orderNo' => $resultObj->body->mainInfo->orderNo,
-            'busiProposalNo' => $resultObj->body->mainInfo->busiProposalNo,
-            'bzProposalNo' => $resultObj->body->mainInfo->bzProposalNo,
-            'prePayOrderCreateTime' => $resultObj->body->mainInfo->prePayOrderCreateTime,
-            'effectivePaymentTime' => $resultObj->body->mainInfo->effectivePaymentTime,
-            'bzVerifyCodeImg' => $resultObj->body->mainInfo->bzVerifyCodeImg,
-            'busiVerifyCodeImg' => $resultObj->body->mainInfo->busiVerifyCodeImg,
-        ];
-        return $this->withData($data);*/
     }
 }

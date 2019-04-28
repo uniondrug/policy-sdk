@@ -1,7 +1,7 @@
 <?php
 return '{
-  "transactionNo": "1904267166",
-  "aiBaoTransactionNo": "ABXCAR181556263606744720496510",
+  "transactionNo": "1904282500",
+  "aiBaoTransactionNo": "ABXCAR181556435413062712402684",
   "insuredBirthday": "1994-02-12",
   "insuredIdNo": "411302199402126050",
   "insuredIdType": "01",

@@ -35,17 +35,5 @@ trait InsureCheck
         $this->logger->insureCheck()->info("保司响应报文:" . $result);
         $resultObj = json_decode($result,true);
         return $resultObj;
-
-//        if ($resultObj->head->errorCode != "0000") {
-//            return $this->withError($resultObj->head->errorMsg);
-//        }
-//        $data = [
-//            'aiBaoTransactionNo' => $resultObj->head->aiBaoTransactionNo,
-//            'cityCode' => $resultObj->body->cityCode,
-//            'licenseNoFlag' => $resultObj->body->licenseNoFlag,
-//            'licenseNo' => $resultObj->body->licenseNo,
-//            'transactionNo' => $resultObj->head->transactionNo,
-//        ];
-//        return $this->withData($data);
     }
 }

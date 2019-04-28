@@ -21,11 +21,11 @@ trait FreeQuote
                     "busiEndDate" => $post['busiEndDate'] ?? '',
                     "bzStartDate" => $post['bzStartDate'] ?? '',
                     "bzEndDate" => $post['bzEndDate'] ?? '',
-                    "bzInsureFlag" => $post['bzInsureFlag'] ?? '',
-                    "busiInsureFlag" => $post['busiInsureFlag'] ?? '',
+                    "bzInsureFlag" => $post['bzInsureFlag'] ?? '1',
+                    "busiInsureFlag" => $post['busiInsureFlag'] ?? '1',
                     "bzVerifyCode" => $post['bzVerifyCode'] ?? '',
                     "busiVerifyCode" => $post['busiVerifyCode'] ?? '',
-                    "carShipFlag" => $post['carShipFlag'] ?? '',
+                    "carShipFlag" => $post['carShipFlag'] ?? '1',
                 ]
             ]
         ];
@@ -42,15 +42,6 @@ trait FreeQuote
         $this->logger->freeQuote()->info("保司响应报文:" . $result);
         $resultObj = json_decode($result,true);
         return $resultObj;
-/*        if ($resultObj->head->errorCode != "0000") {
-            return $this->withError($resultObj->head->errorMsg);
-        }
-        $data = [
-            'aiBaoTransactionNo' => $resultObj->head->aiBaoTransactionNo,
-            'transactionNo' => $resultObj->head->transactionNo,
-            'body' => $resultObj->body,
-        ];
-        return $this->withData($data);*/
     }
 
     private function setItem($items){

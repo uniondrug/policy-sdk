@@ -26,8 +26,8 @@ trait DefaultQuote
                     "mobileHolederName" => $post['mobileHolederName'],
                     "mobileHolederIdType" => $this->convertIdentifyType($post['mobileHolederIdType']) ,
                     "mobileHolederIdNo" => $post['mobileHolederIdNo'],
-                    "email" => $post['email'] ?? '',
-                    "address" => $post['address'] ?? '',
+                    "email" => $post['insuredEmail'] ?? '',
+                    "address" => $post['insuredAddress'] ?? '',
                 ],
                 "carOwnerInfo" => [
                     "birthday" => $post['carOwnerBirthday'],
@@ -36,8 +36,8 @@ trait DefaultQuote
                     "idName" => $post['carOwnerIdName'],
                     "sex" => $post['carOwnerSex'],
                     "mobile" => $post['carOwnerMobile'],
-                    "email" => $post['email'] ?? '',
-                    "address" => $post['address'] ?? '',
+                    "email" => $post['carOwnerEmail'] ?? '',
+                    "address" => $post['carOwnerAddress'] ?? '',
                 ],
                 "carInfo" => [
                     "vehicleCode" => $post['vehicleCode'] ?? '',
@@ -46,7 +46,7 @@ trait DefaultQuote
                     "enrollDate" => $post['enrollDate'],
                     "chgOwnerFlag" => $post['chgOwnerFlag'],
                     "transferDate" => $post['transferDate'] ?? '',
-                    "isLoanVehicleFlag" => $post['isLoanVehicleFlag'],
+                    "isLoanVehicleFlag" => $post['isLoanVehicleFlag'] ?? '0',
                     "modelCode" => $post['modelCode'] ?? '',
                     "standardName" => $post['standardName'] ?? '',
                     "seatCount" => $post['seatCount'] ?? '',
@@ -100,14 +100,5 @@ trait DefaultQuote
         $this->logger->defaultQuote()->info("保司响应报文:" . $result);
         $resultObj = json_decode($result,true);
         return $resultObj;
-/*        if ($resultObj->head->errorCode != "0000") {
-            return $this->withError($resultObj->head->errorMsg);
-        }
-        $data = [
-            'aiBaoTransactionNo' => $resultObj->head->aiBaoTransactionNo,
-            'transactionNo' => $resultObj->head->transactionNo,
-            'body' => $resultObj->body,
-        ];
-        return $this->withData($data);*/
     }
 }
