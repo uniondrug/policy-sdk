@@ -43,8 +43,8 @@ class Base extends Sdk
             'nonce' => substr(md5(microtime(1)), 0, 20),
             'data' => json_encode($postData, JSON_UNESCAPED_UNICODE)
         ];
-        $params['signature'] = md5($this->getLinkString($params) . $this->config->key);
-        return $params;
+        $postData['signature'] = md5($this->getLinkString($params) . $this->config->key);
+        return $postData;
     }
 
     protected function getLinkString($params)

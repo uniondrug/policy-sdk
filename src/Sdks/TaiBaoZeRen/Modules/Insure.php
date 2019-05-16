@@ -19,7 +19,7 @@ trait Insure
             <body>
                  <entity>
                     <plcBase>
-                        <plcTerminalNo>3010100</plcTerminalNo>
+                        <plcTerminalNo>6020100</plcTerminalNo>
                         <plcBusinessNo>' . $post['orderNo'] . '</plcBusinessNo>
                         <plcPlanCode>' . $post['riskCode'] . '</plcPlanCode>
                         <plcStartDate>' . date("YmdH", strtotime($post['startDate'])) . '</plcStartDate>
@@ -31,6 +31,13 @@ trait Insure
                     </plcBase>
                     ' . $this->getPolicyInfo($post['policyInfo'], $post['policyExt']) . '
                     ' . $this->getInsuredList($post['insuredList'], $post['insuredExt']) . '
+                    <handlerList>
+				        <handler>
+					        <hdlrBrchCode>6020100</hdlrBrchCode>
+					        <hdlrCode>005069</hdlrCode>
+					        <hdlrBusiProportion>1</hdlrBusiProportion>
+				        </handler>
+			        </handlerList>
                     ' . $this->getDynamic($post['dynamicDto'], $post['dynamicExt'], $post) . '
                     <elcPolicy>
                         <elcMsgFlag>0</elcMsgFlag>

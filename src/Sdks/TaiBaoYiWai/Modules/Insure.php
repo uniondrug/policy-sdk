@@ -19,7 +19,7 @@ trait Insure
             <body>
                 <PolicyApplyRequest>
                     <PolicyBaseInfo>
-                        <terminalNo>3010100</terminalNo>
+                        <terminalNo>6020100</terminalNo>
                         <planCode>' . $post['riskCode'] . '</planCode>
                         <groupInsuranceFlag>S</groupInsuranceFlag>
                         <billType>0</billType>
@@ -30,6 +30,13 @@ trait Insure
                         <policyPremium/>
                         <uniqueFlag>' . $post['waterNo'] . '</uniqueFlag>
                     </PolicyBaseInfo>
+                    <handlerList>
+				        <handler>
+					        <hdlrBrchCode>6020100</hdlrBrchCode>
+					        <hdlrCode>005069</hdlrCode>
+					        <hdlrBusiProportion>1</hdlrBusiProportion>
+				        </handler>
+			        </handlerList>
                    ' . $this->getPolicyInfo($post['policyInfo'], $post['policyExt']) . '
                    ' . $this->getInsuredList($post['insuredList'], $post['insuredExt']) . '
                    ' . $this->getDynamic($post['dynamicDto'], $post['dynamicExt'], $post) . '

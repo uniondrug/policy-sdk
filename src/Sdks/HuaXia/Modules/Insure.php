@@ -85,7 +85,7 @@ trait Insure
             $data['FlightNo'] = $dynamicDto['ticketNo'] ?: "";
         }
         if (in_array('trafficStartTime', $dynamicExt)) {
-            $data['date'] = $dynamicDto['trafficStartTime'] ?: "";
+            $data['date'] = date("Ymd", strtotime($dynamicDto['trafficStartTime'])) ?: "";
         }
         $postData = array_merge($postData, $data);
     }

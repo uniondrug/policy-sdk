@@ -9,6 +9,7 @@ trait Insure
         $postData = [
             'waterNo' => $post['waterNo'],
             'totalPremium' => $post['totalPremium'],
+            'plateformCode' => $post['plateformCode'],
             'totalGuarantee' => $post['sumAssured'],
             'rationType' => $post['rationType'],
             'riskCode' => $post['riskCode'],
