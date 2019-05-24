@@ -21,17 +21,16 @@ trait Verify{
             <Request>
                 <InputsList>
                     <Inputs type="applicantInfo">
-                        <Input name="applicantName">' . $post['ownerName'] . '</Input>
-                        <Input name="applicantIdType">' . $post['ownerIdType'] . '</Input>
-                        <Input name="applicantIdNo">' . $post['ownerIdNo'] . '</Input>
-                        <Input name="applicantMobile">' . $post['ownerMobile'] . '</Input>
+                        <Input name="ownerName">' . $post['ownerName'] . '</Input>
+                        <Input name="ownerIdType">' . $post['ownerIdType'] . '</Input>
+                        <Input name="ownerIdNo">' . $post['ownerIdNo'] . '</Input>
+                        <Input name="ownerMobile">' . $post['ownerMobile'] . '</Input>
                     </Inputs>
                     <Inputs type="insuredInfo">
-                        <Input name="insuredName">' . $post['insuredName'] . '</Input>
-                        <Input name="insuredType">' . $post['insuredType'] . '</Input>
-                        <Input name="insuredIdNo">' . $post['insuredIdNo'] . '</Input>
-                        <Input name="insuredGender">' . $post['insuredGender'] . '</Input>
-                        <Input name="insuredMobile">' . $post['insuredMobile'] . '</Input>
+                        <Input name="applicantName">' . $post['applicantName'] . '</Input>
+                        <Input name="applicantIdType">' . $post['applicantIdType'] . '</Input>
+                        <Input name="applicantIdNo">' . $post['applicantIdNo'] . '</Input>
+                        <Input name="applicantMobile">' . $post['applicantMobile'] . '</Input>
                     </Inputs>
                 </InputsList>
                 <VerifyCode>' . $post['VerifyCode'] . '</VerifyCode>
