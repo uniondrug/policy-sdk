@@ -28,5 +28,13 @@ trait CheckQuote{
         } catch (\Exception $e) {
             return $this->withError($e->getMessage());
         }
+        if ($resultArray['Package']['Header']['Status'] != 100) {
+            return $this->withError($resultArray['Package']['Header']['ErrorMessage'],$resultArray['Package']['Header']['Status']);
+        }
+        $data = [
+            'header' => $resultArray['Package']['Header'],
+            'data' => $resultArray['Package']['Response'],
+        ];
+        return $this->withData($data);
     }
 }
