@@ -73,10 +73,10 @@ class Base extends Sdk
      * @param $xml_content
      * @return array|mixed|\SimpleXMLElement
      */
-    public function getCurl($request_content, $name, $transactionNo)
+    public function getCurl($request_content, $name, $transactionNo,$requestType)
     {
         try {
-            $xml_content = $this->getHead($transactionNo);
+            $xml_content = $this->getHead($transactionNo,$requestType);
             $xml_content .= $request_content;
             $xml_content .= '<Sign>' . $this->getSign($request_content) . '</Sign>
             </Package>
@@ -127,7 +127,7 @@ class Base extends Sdk
     }
 
     //组装头部报文
-    private function getHead($transactionNo)
+    private function getHead($transactionNo,$requestType)
     {
 
         $head_content = '<?xml version="1.0" encoding="utf-8"?>
@@ -135,7 +135,7 @@ class Base extends Sdk
             <Package>
                 <Header>
                     <Version>2</Version>
-                    <RequestType>101106</RequestType>
+                    <RequestType>' . $requestType . '</RequestType>
                     <InsureType>100</InsureType>
                     <SessionId>' . $transactionNo . '</SessionId>
                     <SellerId>123456</SellerId>

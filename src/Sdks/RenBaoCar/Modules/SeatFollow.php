@@ -4,22 +4,7 @@ namespace Uniondrug\PolicySdk\Sdks\RenBaoCar\Modules;
 
 trait SeatFollow{
     public function seatFollow(array $post){
-        $xml_content = '<?xml version="1.0" encoding="utf-8"?>
-        <?xml version="1.0" encoding="utf-8"?>
-        <PackageList> 
-          <Package> 
-            <Header> 
-              <RequestType>400</RequestType>  
-              <Version>2</Version>  
-              <InsureType>100</InsureType>  
-              <SessionId>' . $post['transactionNo'] . '</SessionId>  
-              <SellerId>123456</SellerId>  
-              <From>YC</From>  
-              <SendTime>' . date('Y-m-d H:i:s',time()) . '</SendTime>  
-              <Status>100</Status>  
-              <ErrorMessage/> 
-            </Header>  
-                <Request> 
+        $request_content = '<Request> 
                     <sessionId>' . $post['sessionId'] . '</sessionId> 
                     <leadsId>' . $post['leadsId'] . '</leadsId>
                     <operationType>' . $post['operationType'] . '</operationType>
@@ -43,14 +28,18 @@ trait SeatFollow{
                         <ownerIdType>' . $post['ownerIdType'] . '</ownerIdType>
                         <ownerIdNo>' . $post['ownerIdNo'] . '</ownerIdNo>
                     </ownerInfo>
-            </Request>  
-            <Sign></Sign> 
-          </Package> 
-        </PackageList>';
-        $resultObj = $this->getCurl($xml_content);
+            </Request>';
+        try {
+            $resultArray = $this->getCurl($request_content,__FUNCTION__,$post['transactionNo'],'400');
+        } catch (\Exception $e) {
+            return $this->withError($e->getMessage());
+        }
+        if ($resultArray['Package']['Header']['Status'] != 100) {
+            return $this->withError($resultArray['Package']['Header']['ErrorMessage']);
+        }
         $data = [
-            'header' => $resultObj['Package']['Header'],
-            'data' => $resultObj['Package']['Response'],
+            'header' => $resultArray['Package']['Header'],
+            'data' => $resultArray['Package']['Response'],
         ];
         return $this->withData($data);
     }

@@ -4,21 +4,7 @@ namespace Uniondrug\PolicySdk\Sdks\RenBaoCar\Modules;
 
 trait CollectInfo{
     public function collectInfo(array $post){
-        $xml_content = '<?xml version="1.0" encoding="utf-8"?>
-        <PackageList> 
-          <Package> 
-            <Header> 
-              <RequestType>315</RequestType>  
-              <Version>2</Version>  
-              <InsureType>100</InsureType>  
-              <SessionId>' . $post['transactionNo'] . '</SessionId>  
-              <SellerId>123456</SellerId>  
-              <From>DDINSURE</From>  
-              <SendTime>' . date('Y-m-d H:i:s',time()) . '</SendTime>  
-              <Status>100</Status>  
-              <ErrorMessage/> 
-            </Header>  
-            <Request> 
+        $request_content = '<Request> 
               <InputsList> 
                 <Inputs type="applicantInfo"> 
                   <Input name="applicantName">' . $post['applicantName'] . '</Input>  
@@ -43,14 +29,18 @@ trait CollectInfo{
                   <Input name="insuredCertiEndDate">' . $post['insuredCertiEndDate'] . '</Input> 
                 </Inputs> 
               </InputsList> 
-            </Request>  
-            <Sign></Sign> 
-          </Package> 
-        </PackageList>';
-        $resultObj = $this->getCurl($xml_content);
+            </Request>';
+        try {
+            $resultArray = $this->getCurl($request_content,__FUNCTION__,$post['transactionNo'],'315');
+        } catch (\Exception $e) {
+            return $this->withError($e->getMessage());
+        }
+        if ($resultArray['Package']['Header']['Status'] != 100) {
+            return $this->withError($resultArray['Package']['Header']['ErrorMessage']);
+        }
         $data = [
-            'header' => $resultObj['Package']['Header'],
-            'data' => $resultObj['Package']['Response'],
+            'header' => $resultArray['Package']['Header'],
+            'data' => $resultArray['Package']['Response'],
         ];
         return $this->withData($data);
     }
