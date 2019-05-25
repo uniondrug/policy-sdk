@@ -36,12 +36,18 @@ trait DefaultQuote {
                     </InputsList> 
                 </Request>';
         try {
-            $resultArray = $this->getCurl($request_content,__FUNCTION__,$post['transactionNo']);
+            $resultArray = $this->getCurl($request_content,__FUNCTION__,$post['transactionNo'],'101106');
         } catch (\Exception $e) {
             return $this->withError($e->getMessage());
         }
+        if($resultArray['Package']['Header']['Status'] == 600){
+            $data = [
+                'header' => $resultArray['Package']['Header'],
+                'data' =>''
+            ];
+        }
         if ($resultArray['Package']['Header']['Status'] != 100) {
-            return $this->withError($resultArray['Package']['Header']['ErrorMessage']);
+            return $this->withError($resultArray['Package']['Header']['ErrorMessage'],$resultArray['Package']['Header']['Status']);
         }
         $data = [
             'header' => $resultArray['Package']['Header'],
