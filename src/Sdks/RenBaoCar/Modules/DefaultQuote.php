@@ -40,18 +40,12 @@ trait DefaultQuote {
         } catch (\Exception $e) {
             return $this->withError($e->getMessage());
         }
-        if($resultArray['Package']['Header']['Status'] == 600){
-            $data = [
-                'header' => $resultArray['Package']['Header'],
-                'data' =>''
-            ];
-        }
-        if ($resultArray['Package']['Header']['Status'] != 100) {
+        if ($resultArray['Package']['Header']['Status'] != 100 && $resultArray['Package']['Header']['Status'] != 600) {
             return $this->withError($resultArray['Package']['Header']['ErrorMessage'],$resultArray['Package']['Header']['Status']);
         }
         $data = [
             'header' => $resultArray['Package']['Header'],
-            'data' => $resultArray['Package']['Response'],
+            'data' => $resultArray['data'],
         ];
         return $this->withData($data);
     }
