@@ -21,35 +21,35 @@ trait DefaultQuote
                     "idNo" => $post['insuredIdNo'],
                     "idType" => $this->convertIdentifyType($post['insuredIdType']),
                     "idName" => $post['insuredIdName'],
-                    "sex" => $post['insuredSex'],
+                    "sex" => $post['insuredGender'],
                     "mobile" => $post['insuredMobile'],
-                    "mobileHolederName" => $post['mobileHolederName'],
-                    "mobileHolederIdType" => $this->convertIdentifyType($post['mobileHolederIdType']) ,
-                    "mobileHolederIdNo" => $post['mobileHolederIdNo'],
+                    "mobileHolederName" => $post['insuredMobileHolederName'],
+                    "mobileHolederIdType" => $this->convertIdentifyType($post['insuredMobileHolederIdType']) ,
+                    "mobileHolederIdNo" => $post['insuredMobileHolederIdNo'],
                     "email" => $post['insuredEmail'] ?? '',
                     "address" => $post['insuredAddress'] ?? '',
                 ],
                 "carOwnerInfo" => [
-                    "birthday" => $post['carOwnerBirthday'],
-                    "idNo" => $post['carOwnerIdNo'],
-                    "idType" => $this->convertIdentifyType($post['carOwnerIdType']),
-                    "idName" => $post['carOwnerIdName'],
-                    "sex" => $post['carOwnerSex'],
-                    "mobile" => $post['carOwnerMobile'],
+                    "birthday" => $post['ownerBirthday'],
+                    "idNo" => $post['ownerIdNo'],
+                    "idType" => $this->convertIdentifyType($post['ownerIdType']),
+                    "idName" => $post['ownerName'],
+                    "sex" => $post['ownerGender'],
+                    "mobile" => $post['ownerMobile'],
                     "email" => $post['carOwnerEmail'] ?? '',
                     "address" => $post['carOwnerAddress'] ?? '',
                 ],
                 "carInfo" => [
                     "vehicleCode" => $post['vehicleCode'] ?? '',
-                    "frameNo" => strtoupper($post['frameNo']),
+                    "frameNo" => strtoupper($post['vehicleFrameNo']),
                     "engineNo" => strtoupper($post['engineNo']),
-                    "enrollDate" => $post['enrollDate'],
-                    "chgOwnerFlag" => $post['chgOwnerFlag'],
+                    "enrollDate" => $post['registerDate'],
+                    "chgOwnerFlag" => $post['specialCarFlag'] ?? '0',
                     "transferDate" => $post['transferDate'] ?? '',
-                    "isLoanVehicleFlag" => $post['isLoanVehicleFlag'] ?? '0',
+                    "isLoanVehicleFlag" => $post['loanFlag'] ?? '0',
                     "modelCode" => $post['modelCode'] ?? '',
                     "standardName" => $post['standardName'] ?? '',
-                    "seatCount" => $post['seatCount'] ?? '',
+                    "seatCount" => $post['vehicleSeats'] ?? '',
                     "brandName" => $post['brandName'] ?? '',
                     "familyName" => $post['familyName'] ?? '',
                     "countryNature" => $post['countryNature'] ?? '',
@@ -76,15 +76,15 @@ trait DefaultQuote
                     "carproofno" => $post['carproofno'] ?? '',
                 ],
                 "mainInfo" => [
-                    "busiStartDate" => $post['busiStartDate'] ?? '',
-                    "busiEndDate" => $post['busiEndDate'] ?? '',
-                    "bzStartDate" => $post['bzStartDate'] ?? '',
-                    "bzEndDate" => $post['bzEndDate'] ?? '',
+                    "busiStartDate" => $post['bizBeginDate'] ?? '',
+                    "busiEndDate" => $post['forceBeginDate'] ?? '',
+                    "bzStartDate" => $post['forceBeginDate'] ?? '',
+                    "bzEndDate" => $post['forceEndDate'] ?? '',
                     "effectiveImmediatelyFlag" => $post['effectiveImmediatelyFlag'] ?? '',
-                    "beneficiary" => $post['beneficiary'] ?? '',
+                    "beneficiary" => $post['loanName'] ?? '',
                     "insurenceCode" => $this->config->insurenceCode,
-                    "bzVerifyCode" => $post['bzVerifyCode'] ?? '',
-                    "busiVerifyCode" => $post['busiVerifyCode'] ?? '',
+                    "bzVerifyCode" => $post['checkCodeCI'] ?? '',
+                    "busiVerifyCode" => $post['checkCode'] ?? '',
                 ]
             ]
         ];
@@ -99,6 +99,6 @@ trait DefaultQuote
         }
         $this->logger->defaultQuote()->info("保司响应报文:" . $result);
         $resultObj = json_decode($result,true);
-        return $resultObj;
+        return $this->returnRes($resultObj);
     }
 }
