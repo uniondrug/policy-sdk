@@ -17,7 +17,7 @@ trait InsureCheck
             ],
             'body' => [
                 'cityCode' => $post['cityCode'], //投保城市代码
-                'licenseNoFlag' =>$post['licenseNoFlag'] , //新车未上牌标示 0-非新车 1-新车
+                'licenseNoFlag' =>$post['noLicenseFlag'] , //新车未上牌标示 0-非新车 1-新车
                 'licenseNo' => $post['licenseNo'], //车牌号(字母大写)
                 'channelId' =>$this->config->channelId , //渠道编号
                 'userId' => '',
