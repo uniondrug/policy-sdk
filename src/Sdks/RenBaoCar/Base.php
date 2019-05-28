@@ -91,6 +91,9 @@ class Base extends Sdk
             //验签
             $resultArray = xml_to_array($result, 'GB2312');
             $this->checkSign($data['0'],$resultArray['Package']['Sign']);
+            if(in_array($requestType,[101106,101110])){
+                $resultArray['data'] = $this->xmlWithAttribute($result);
+            }
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }
@@ -146,6 +149,28 @@ class Base extends Sdk
                 </Header>';
 
         return $head_content;
+    }
+
+    //TagsList标签内容转换
+    private function xmlWithAttribute($result)
+    {
+        $pattern = "/<Response>.*?<\/Response>/is";
+        preg_match($pattern,$result,$data);
+        $dom = new \DOMDocument();
+        $dom->loadXML($data[0]);
+        $root = $dom->documentElement;
+        $tags=$root->getElementsByTagName('Tags');
+        foreach ($tags as $key=>$tag){
+            $definitions = $tag->getElementsByTagName('Tag');
+            foreach ($definitions as $item => $definition){
+                foreach ($definition->getElementsByTagName('Definition') as $definition){
+                    $child[$item][$definition->getAttribute('name')] = $definition->nodeValue;
+                }
+            }
+            $arr[$tag->getAttribute('type')] = $child;
+            $child=[];
+        }
+        return $arr;
     }
 
 
