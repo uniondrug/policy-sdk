@@ -45,7 +45,7 @@ trait DefaultQuote
                     "engineNo" => strtoupper($post['engineNo']),
                     "enrollDate" => $post['registerDate'],
                     "chgOwnerFlag" => $post['specialCarFlag'] ?? '0',
-                    "transferDate" => $post['transferDate'] ?? '',
+                    "transferDate" => $post['specialCarDate'] ?? '',
                     "isLoanVehicleFlag" => $post['loanFlag'] ?? '0',
                     "modelCode" => $post['modelCode'] ?? '',
                     "standardName" => $post['standardName'] ?? '',
@@ -77,7 +77,7 @@ trait DefaultQuote
                 ],
                 "mainInfo" => [
                     "busiStartDate" => $post['bizBeginDate'] ?? '',
-                    "busiEndDate" => $post['forceBeginDate'] ?? '',
+                    "busiEndDate" => $post['bizEndDate'] ?? '',
                     "bzStartDate" => $post['forceBeginDate'] ?? '',
                     "bzEndDate" => $post['forceEndDate'] ?? '',
                     "effectiveImmediatelyFlag" => $post['effectiveImmediatelyFlag'] ?? '',

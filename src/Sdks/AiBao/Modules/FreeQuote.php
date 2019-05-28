@@ -17,19 +17,19 @@ trait FreeQuote
             ],
             'body' => [
                 "mainInfo" => [
-                    "busiStartDate" => $post['busiStartDate'] ?? '',
-                    "busiEndDate" => $post['busiEndDate'] ?? '',
-                    "bzStartDate" => $post['bzStartDate'] ?? '',
-                    "bzEndDate" => $post['bzEndDate'] ?? '',
-                    "bzInsureFlag" => $post['bzInsureFlag'] ?? '1',
-                    "busiInsureFlag" => $post['busiInsureFlag'] ?? '1',
-                    "bzVerifyCode" => $post['bzVerifyCode'] ?? '',
-                    "busiVerifyCode" => $post['busiVerifyCode'] ?? '',
+                    "busiStartDate" => $post['bizBeginDate'] ?? '',
+                    "busiEndDate" => $post['bizEndDate'] ?? '',
+                    "bzStartDate" => $post['forceBeginDate'] ?? '',
+                    "bzEndDate" => $post['forceEndDate'] ?? '',
+                    "bzInsureFlag" => $post['bizFlag'] ?? '1',
+                    "busiInsureFlag" => $post['forceFlag'] ?? '1',
+                    "bzVerifyCode" => $post['checkCodeCI'] ?? '',
+                    "busiVerifyCode" => $post['checkCode'] ?? '',
                     "carShipFlag" => $post['carShipFlag'] ?? '1',
                 ]
             ]
         ];
-        $postData['body']['itemKindInfo'] = $this->setItem($post['items']);
+        $postData['body']['itemKindInfo'] = $this->setItem($post['optionInfo']);
         $postJson = json_encode($postData, JSON_UNESCAPED_UNICODE);
         $this->logger->freeQuote()->info("保司请求报文:" . $postJson);
         $header = ['Content-Type: application/json'];
@@ -53,9 +53,9 @@ trait FreeQuote
                 'kindName' => $item['kindName'] ?? '',
                 'unitAmount' => $item['unitAmount'] ?? '',
                 'quantity' => $item['quantity'] ?? '',
-                'amount' => $item['amount'],
-                'premium' => $item['premium'] ?? '',
-                'insureFlag' => $item['insureFlag'],
+                'amount' => $item['kindValue'],
+                'premium' => $item['kindPremium'] ?? '',
+                'insureFlag' => 1,
             ];
         }
         return $data;
