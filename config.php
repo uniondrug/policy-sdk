@@ -46,4 +46,8 @@ return [
     * 爱保车险
     */
     'Sdk:AIBAO' => "AiBao",
+    /*
+    * 人保车险
+    */
+    'Sdk:RENBAOCAR' => "RenBaoCar",
 ];

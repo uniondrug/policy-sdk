@@ -17,15 +17,15 @@ trait IdCheck
             ],
             'body' => [
                 "applicantInfo" => [
-                    "idNo" => $post['insurantIdNo'],
-                    "idType" => $this->convertIdentifyType($post['insurantIdType']),
-                    "idName" => $post['insurantIdName'],
-                    "mobile" => $post['insurantMobile'],
-                    "applicantNation" => $post['insurantNation'] ?? '',
-                    "applicantAddress" => $post['insurantAddress'] ?? '',
-                    "applicantIssuer" =>$post['insurantIssuer'] ?? '',
-                    "applicantCertiStartDat" => $post['insurantCertiStartDat'] ?? '',
-                    "applicantCertiEndDate" => $post['insurantCertiEndDate'] ?? '',
+                    "idNo" => $post['applicantIdNo'],
+                    "idType" => $this->convertIdentifyType($post['applicantIdType']),
+                    "idName" => $post['applicantName'],
+                    "mobile" => $post['applicantMobile'],
+                    "applicantNation" => $post['applicantNation'] ?? '',
+                    "applicantAddress" => $post['applicantAddress'] ?? '',
+                    "applicantIssuer" =>$post['applicantIssuer'] ?? '',
+                    "applicantCertiStartDat" => $post['applicantCertiStartDat'] ?? '',
+                    "applicantCertiEndDate" => $post['applicantCertiEndDate'] ?? '',
                 ],
                 "insuredInfo" => [
                     "insuredNation" => $post['insuredNation'] ?? '',
@@ -47,6 +47,6 @@ trait IdCheck
         }
         $this->logger->idCheck()->info("保司响应报文:" . $result);
         $resultObj = json_decode($result,true);
-        return $resultObj;
+        return $this->returnRes($resultObj);
     }
 }

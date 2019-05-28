@@ -34,6 +34,6 @@ trait PolicyQuery
         }
         $this->logger->policyQuery()->info("保司响应报文:" . $result);
         $resultObj = json_decode($result,true);
-        return $resultObj;
+        return $this->returnRes($resultObj);
     }
 }

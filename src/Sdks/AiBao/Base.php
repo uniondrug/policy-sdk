@@ -101,4 +101,11 @@ class Base extends Sdk
         }
         return $type;
     }
+
+    public function returnRes($resultObj){
+        if($resultObj['head']['errorCode'] != '0000'){
+            return $this->withError($resultObj['head']['errorMsg'],$resultObj['head']['errorCode']);
+        }
+        return $this->withData($resultObj);
+    }
 }
