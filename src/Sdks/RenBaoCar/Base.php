@@ -142,7 +142,7 @@ class Base extends Sdk
                     <InsureType>100</InsureType>
                     <SessionId>' . $transactionNo . '</SessionId>
                     <SellerId>123456</SellerId>
-                    <From>DDINSURE</From>
+                    <From>YL</From>
                     <SendTime>' . date('Y-m-d H:i:s', time()) . '</SendTime>
                     <Status>100</Status>
                     <ErrorMessage></ErrorMessage>
