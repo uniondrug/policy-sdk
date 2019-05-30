@@ -67,7 +67,7 @@ trait DefaultQuote
                     "subMonopolyType" => $post['subMonopolyType'] ?? '',
                 ],
                 "extendInfo" => [
-                    "buyCarDate" => $post['buyCarDate  '] ?? '', //购车发票日期，上海地区 新车未上牌必传 YYYY-MM-DD
+                    "buyCarDate" => $post['buyCarDate'] ?? '', //购车发票日期，上海地区 新车未上牌必传 YYYY-MM-DD
                     "vehicleType" => $post['vehicleType'] ?? '',
                     "traveltaxAddress" => $post['traveltaxAddress'] ?? '',
                     "carproofdate" => $post['carproofdate'] ?? '',
