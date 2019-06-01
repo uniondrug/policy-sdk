@@ -7,14 +7,7 @@ trait DefaultQuote
     public function defaultQuote(array $post)
     {
         $postData = [
-            'head' => [
-                'transactionNo' => $post['transactionNo'],
-                'aiBaoTransactionNo' => $post['aiBaoTransactionNo'],
-                'operator' => $this->config->operator,
-                'timeStamp' => date('Y-m-d H:i:s',time()),
-                'errorCode' => '0000',
-                'errorMsg' =>  '成功',
-            ],
+            'head' => $this->getHeader($post),
             'body' => [
                 "insuredInfo" => [
                     "birthday" => $post['insuredBirthday'],

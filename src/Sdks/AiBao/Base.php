@@ -108,4 +108,14 @@ class Base extends Sdk
         }
         return $this->withData($resultObj);
     }
+    public function getHeader($post){
+        return  [
+            'transactionNo' => $post['TransactionNo'],
+            'aiBaoTransactionNo' => $post['SessionId'],
+            'operator' => $this->config->operator,
+            'timeStamp' => date('Y-m-d H:i:s',time()),
+            'errorCode' => '0000',
+            'errorMsg' =>  '成功',
+        ];
+    }
 }
