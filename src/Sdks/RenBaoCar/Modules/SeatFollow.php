@@ -6,16 +6,15 @@ trait SeatFollow{
     public function seatFollow(array $post){
         $request_content = '<Request> 
                     <sessionId>' . $post['sessionId'] . '</sessionId> 
-                    <leadsId>' . $post['leadsId'] . '</leadsId>
+                    <leadsId>' . $post['sessionId'] . '</leadsId>
                     <operationType>' . $post['operationType'] . '</operationType>
-                    <cancelFlag>1</cancelFlag>
                     <realMobile>' . $post['realMobile'] . '</realMobile> 
                     <virtualMobile>' . $post['virtualMobile'] . '</virtualMobile> 
                     <isQuote>' . $post['isQuote'] . '</isQuote> 
                     <vehicleInfo>
                         <citycode>' . $post['citycode'] . '</citycode>
-                        <licenseNo>' . $post['licenseNo'] . '</licenseNo>
                         <commerialVehicleFlag>' . $post['commerialVehicleFlag'] . '</commerialVehicleFlag>
+                        <licenseNo>' . $post['licenseNo'] . '</licenseNo>
                         <vehicleFrameNo>' . $post['vehicleFrameNo'] . '</vehicleFrameNo>
                         <engineNo>' . $post['engineNo'] . '</engineNo>
                         <registerDate>' . $post['registerDate'] . '</registerDate>

@@ -8,12 +8,10 @@ trait SuppleQuote{
                     <Inputs type="vehicleInfo">
                         <Input name="vehicleBrand">' . $post['vehicleBrand'] . '</Input>
                         <Input name="vehicleFrameNo">' . $post['vehicleFrameNo'] . '</Input>
-                        <Input name="engineNo">' . $post['vehicleFrameNo'] . '</Input>
-                        <Input name="checkCode"></Input>
+                        <Input name="engineNo">' . $post['engineNo'] . '</Input>
                         <Input name="specialCarFlag">' . $post['specialCarFlag'] . '</Input>
                         <Input name="registerDate">' . $post['registerDate'] . '</Input>
-                        <Input name="checkCodeCI"></Input>
-                       <Input name="checkCodeJS"></Input>
+                        <Input name="checkCodeJS">' . $post['checkCodeJS'] . '</Input>
                         <Input name="vehicleModel">' . $post['vehicleModel'] . '</Input>
                         <Input name="specialCarDate">' . $post['specialCarDate'] . '</Input>
                         <Input name="buyCarDate">' . $post['buyCarDate'] . '</Input>
@@ -23,6 +21,8 @@ trait SuppleQuote{
                         <Input name="ownerIdNo">' . $post['ownerIdNo'] . '</Input>
                         <Input name="ownerIdType">' . $post['ownerIdType'] . '</Input>
                         <Input name="ownerName">' . $post['ownerName'] . '</Input>
+                        <Input name="ownerGender">' . $post['ownerGender'] . '</Input>
+                        <Input name="ownerBirthday">' . $post['ownerBirthday'] . '</Input>
                     </Inputs>
                 </InputsList>
             </Request>';
@@ -31,12 +31,13 @@ trait SuppleQuote{
         } catch (\Exception $e) {
             return $this->withError($e->getMessage());
         }
-        if ($resultArray['Package']['Header']['Status'] != 100) {
+        if ($resultArray['Package']['Header']['Status'] != 200) {
             return $this->withError($resultArray['Package']['Header']['ErrorMessage']);
         }
         $data = [
             'header' => $resultArray['Package']['Header'],
             'data' => $resultArray['Package']['Response'],
+            'tags' => $resultArray['data']
         ];
         return $this->withData($data);
     }

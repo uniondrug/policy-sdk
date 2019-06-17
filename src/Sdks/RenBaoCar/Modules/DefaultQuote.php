@@ -9,29 +9,29 @@ trait DefaultQuote {
                         <Inputs type="insuredInfo">
                             <Input name="insuredIdNo">' . $post['insuredIdNo'] . '</Input>
                             <Input name="insuredIdType">' . $post['insuredIdType'] . '</Input>
-                            <Input name="insuredName">' . $post['insuredName'] . '</Input>
                             <Input name="insuredGender">' . $post['insuredGender'] . '</Input>
+                            <Input name="insuredName">' . $post['insuredName'] . '</Input>
                             <Input name="insuredBirthday">' . $post['insuredBirthday'] . '</Input>
                         </Inputs>
                         <Inputs type="vehicleInfo">
+                            <Input name="forceBeginDate">' . $post['forceBeginDate'] . '</Input>
+                            <Input name=" subMonopolyType">' . $post['subMonopolyType'] .'</Input>
+                            <Input name="vehicleSeats">' . $post['vehicleSeats'] . '</Input>
+                            <Input name=" monopolyname">' . $post['monopolyname'] .'</Input>
+                            <Input name="bizBeginDate">' . $post['bizBeginDate'] . '</Input>
+                            <Input name=" monopolycode">' . $post['monopolycode'] .'</Input>
                             <Input name="loanName">' . $post['loanName'] . '</Input>
+                            <Input name="loanFlag">' . $post['loanFlag'] . '</Input>
+                            <Input name="bizBeginDateHour">' . $post['bizBeginDateHour'] . '</Input>
                             <Input name="vehicleType">' . $post['vehicleType'] . '</Input>
                             <Input name="traveltaxAddress">' . $post['traveltaxAddress'] . '</Input>
-                            <Input name="vehicleSeats">' . $post['vehicleSeats'] . '</Input>
-                            <Input name="bizBeginDate">' . $post['bizBeginDate'] . '</Input>
-                            <Input name="bizBeginDateHour">' . $post['bizBeginDateHour'] . '</Input>
-                            <Input name="forceBeginDate">' . $post['forceBeginDate'] . '</Input>
                             <Input name="forceBeginDateHour">' . $post['forceBeginDateHour'] . '</Input>
-                            <Input name="loanFlag">' . $post['loanFlag'] . '</Input>
                             <Input name="checkCode">' . $post['checkCode'] . '</Input>
                             <Input name="checkCodeCI">' . $post['checkCodeCI'] . '</Input>
                             <Input name="carproofdate">' . $post['carproofdate'] . '</Input>
                             <Input name="fueltype">' . $post['fueltype'] . '</Input>
                             <Input name="carprooftype">' . $post['carprooftype'] . '</Input>
                             <Input name="carproofno">' . $post['carproofno'] . '</Input>
-                            <Input name=" monopolycode"></Input>
-                            <Input name=" monopolyname"></Input>
-                            <Input name=" subMonopolyType"></Input>
                         </Inputs>
                     </InputsList> 
                 </Request>';
@@ -40,7 +40,8 @@ trait DefaultQuote {
         } catch (\Exception $e) {
             return $this->withError($e->getMessage());
         }
-        if ($resultArray['Package']['Header']['Status'] != 100 && $resultArray['Package']['Header']['Status'] != 600) {
+        //100 成功   600 商业险平台验证码  700 交强险平台验证码
+        if ($resultArray['Package']['Header']['Status'] != 100 && $resultArray['Package']['Header']['Status'] != 600 && $resultArray['Package']['Header']['Status'] != 700) {
             return $this->withError($resultArray['Package']['Header']['ErrorMessage'],$resultArray['Package']['Header']['Status']);
         }
         $data = [
