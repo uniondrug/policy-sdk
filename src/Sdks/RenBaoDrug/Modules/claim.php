@@ -37,8 +37,8 @@ trait Claim
                 <DamageTime>'.$post['majorList']['damageTime'].'</DamageTime>
                 <DamageAddress>'.($post['majorList']['damageAddress'] ?: $this->config->insuredAddress).'</DamageAddress>
                 <DamageAreaCode>'. ($post['majorList']['damageAreaCode'] ?: "11" ).'</DamageAreaCode>
-                <DamageAreaProvinceCode>'.($post['majorList']['damageAreaProvinceCode'] ?: '310000').'</DamageAreaProvinceCode>
-                <DamageAreaCityCode>'.($post['majorList']['damageAreaCityCode'] ?: '310100').'</DamageAreaCityCode>
+                <DamageAreaProvinceCode>'.($post['majorList']['damageAreaProvinceCode'] ?: '440000').'</DamageAreaProvinceCode>
+                <DamageAreaCityCode>'.($post['majorList']['damageAreaCityCode'] ?: '441900').'</DamageAreaCityCode>
                 <DamageReasonCode>'.($post['majorList']['damageReasonCode'] ?: 'A10054').'</DamageReasonCode>
                 <DamageReasonName>'.($post['majorList']['damageReasonName'] ?: '扩展责任').'</DamageReasonName>
                 <Remark>'.$post['majorList']['remark'].'</Remark>
