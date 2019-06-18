@@ -96,7 +96,6 @@ class Base extends Sdk
             $this->logger->{$name}()->info("保司请求报文:" . $xml_content);
             $header = ['Content-Type: text/xml;charset=GBK'];
             $result = $this->curl_https($url, $xml_content, $header, $name, '120');
-            var_dump($result);die;
             $this->logger->{$name}()->info("保司响应报文:" . $result);
             $pattern = "/<Response>.*?<\/Response>/is";
             preg_match($pattern,$result,$data);
