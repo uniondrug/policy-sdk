@@ -239,7 +239,7 @@ class Base extends Sdk
      */
     private function setSign($request)
     {
-        $privateKey = file_get_contents(__DIR__ . "/rsa/their/rsa_private_key.pem");
+        $privateKey = file_get_contents(__DIR__ . "/rsa/our/rsa_private_key.pem");
         $pkeyid = openssl_get_privatekey($privateKey);
         $verify = openssl_sign(trim($request), $signature, $pkeyid, OPENSSL_ALGO_MD5);
         openssl_free_key($pkeyid);
