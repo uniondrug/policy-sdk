@@ -19,7 +19,7 @@ trait Insure
             <body>
                  <entity>
                     <plcBase>
-                        <plcTerminalNo>6020100</plcTerminalNo>
+                        <plcTerminalNo>' . ($post['plateformCode'] ?: 6020100) . '</plcTerminalNo>
                         <plcBusinessNo>' . $post['orderNo'] . '</plcBusinessNo>
                         <plcPlanCode>' . $post['riskCode'] . '</plcPlanCode>
                         <plcStartDate>' . date("YmdH", strtotime($post['startDate'])) . '</plcStartDate>

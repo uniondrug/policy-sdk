@@ -24,7 +24,7 @@ trait Surrender
             </head>
             <body>
                 <entity>
-                    <plcTerminalNo>6020100</plcTerminalNo>
+                    <plcTerminalNo>' . ($post['plateformCode'] ?: 6020100) . '</plcTerminalNo>
                     <plcBusinessNo>' . $post['extend']['orderNo'] . '</plcBusinessNo>
                     <plcNo>' . $post['policyNo'] . '</plcNo>
                     <plcApplyReason>无法采集</plcApplyReason>
