@@ -12,14 +12,14 @@ trait PolicyPush{
         $pattern = "/<Response>.*?<\/Response>/is";
         preg_match($pattern,$result,$data);
         //验签
-        $checkSign = $this->policySign($data['0'],$resultArray['Package']['Sign']);
+//        $checkSign = $this->policySign($data['0'],$resultArray['Package']['Sign']);
         $data = $resultArray["Package"]["Header"];
-        if($checkSign['status'] != 100 && isset($checkSign['status'])){
-            $data['Status']=$checkSign['status'];
-            $data['ErrorMessage']=$checkSign['error'];
-            $data['resultArray'] = $resultArray;
-            return $this->withData($data);
-        }
+//        if($checkSign['status'] != 100 && isset($checkSign['status'])){
+//            $data['Status']=$checkSign['status'];
+//            $data['ErrorMessage']=$checkSign['error'];
+//            $data['resultArray'] = $resultArray;
+//            return $this->withData($data);
+//        }
         $data['Status'] = 100;
         $data['ErrorMessage'] = "成功";
         $data['resultArray'] = $resultArray;
