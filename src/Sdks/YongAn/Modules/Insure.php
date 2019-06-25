@@ -14,7 +14,7 @@ trait Insure
                 "user" => $this->config->user,
                 "password" => $this->config->password,
                 "ccardbsnstyp" => $this->config->salesSource,
-                "git" => $post['plateformCode'] ?: $this->config->salesCode,
+                "opercode" => $post['plateformCode'] ?: $this->config->salesCode,
                 "isgrp" => "0",
                 // 以上为固定字段
                 "serialno" => $waterNo,
