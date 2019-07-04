@@ -202,8 +202,10 @@ class Base extends Sdk
      * 验证回推投保单,回调保单的签名
      */
     private function policySign($response, $sign){
+        $response = str_replace("\r","",$response);
+        $response = convert_encoding($response,"GBK");
         $data['status']=100;
-        $publicKey = file_get_contents(__DIR__ . "/rsa/their/rsa_public_key.pem");
+        $publicKey = file_get_contents(__DIR__ . "/rsa/our/rsa_public_key.pem");
         $pkeyid = openssl_get_publickey($publicKey);
         if (empty($pkeyid)) {
             $data['status'] = 500;
@@ -239,7 +241,7 @@ class Base extends Sdk
      */
     private function setSign($request)
     {
-        $privateKey = file_get_contents(__DIR__ . "/rsa/our/rsa_private_key.pem");
+        $privateKey = file_get_contents(__DIR__ . "/rsa/their/rsa_private_key.pem");
         $pkeyid = openssl_get_privatekey($privateKey);
         $verify = openssl_sign(trim($request), $signature, $pkeyid, OPENSSL_ALGO_MD5);
         openssl_free_key($pkeyid);
