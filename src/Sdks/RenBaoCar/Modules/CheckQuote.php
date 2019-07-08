@@ -26,7 +26,7 @@ trait CheckQuote
                     </InputsList>
                 </Request>';
         try {
-            $resultArray = $this->getCurl($request_content, __FUNCTION__, $post['transactionNo'], '101100');
+            $resultArray = $this->getCurl($request_content, __FUNCTION__, $post['TransactionNo'], '101100');
         } catch (\Exception $e) {
             return $this->withError($e->getMessage());
         }

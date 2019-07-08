@@ -5,8 +5,8 @@ namespace Uniondrug\PolicySdk\Sdks\RenBaoCar\Modules;
 trait SeatFollow{
     public function seatFollow(array $post){
         $request_content = '<Request> 
-                    <sessionId>' . $post['sessionId'] . '</sessionId> 
-                    <leadsId>' . $post['sessionId'] . '</leadsId>
+                    <sessionId>' . $post['SessionId'] . '</sessionId> 
+                    <leadsId>' . $post['SessionId'] . '</leadsId>
                     <operationType>' . $post['operationType'] . '</operationType>
                     <realMobile>' . $post['realMobile'] . '</realMobile> 
                     <virtualMobile>' . $post['virtualMobile'] . '</virtualMobile> 
@@ -29,7 +29,7 @@ trait SeatFollow{
                     </ownerInfo>
             </Request>';
         try {
-            $resultArray = $this->getCurl($request_content,__FUNCTION__,$post['transactionNo'],'400');
+            $resultArray = $this->getCurl($request_content,__FUNCTION__,$post['TransactionNo'],'400');
         } catch (\Exception $e) {
             return $this->withError($e->getMessage());
         }

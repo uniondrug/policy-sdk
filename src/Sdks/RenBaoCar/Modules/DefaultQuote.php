@@ -36,7 +36,7 @@ trait DefaultQuote {
                     </InputsList> 
                 </Request>';
         try {
-            $resultArray = $this->getCurl($request_content,__FUNCTION__,$post['transactionNo'],'101106');
+            $resultArray = $this->getCurl($request_content,__FUNCTION__,$post['TransactionNo'],'101106');
         } catch (\Exception $e) {
             return $this->withError($e->getMessage());
         }
