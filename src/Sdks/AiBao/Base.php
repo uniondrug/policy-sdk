@@ -110,8 +110,8 @@ class Base extends Sdk
     }
     public function getHeader($post){
         return  [
-            'transactionNo' => $post['TransactionNo'],
-            'aiBaoTransactionNo' => $post['SessionId'],
+            'transactionNo' => $post['transactionNo'],
+            'aiBaoTransactionNo' => $post['sessionId'],
             'operator' => $this->config->operator,
             'timeStamp' => date('Y-m-d H:i:s',time()),
             'errorCode' => '0000',
