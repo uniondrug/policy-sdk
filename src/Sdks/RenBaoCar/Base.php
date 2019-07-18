@@ -100,7 +100,7 @@ class Base extends Sdk
             $pattern = "/<Response>.*?<\/Response>/is";
             preg_match($pattern,$result,$data);
             //验签
-            $resultArray = xml_to_array($result, 'GB2312');
+            $resultArray = xml_to_array($result, 'GBK');
             $this->checkSign($data['0'],$resultArray['Package']['Sign']);
             if(in_array($requestType,[101106,101110,101105])){
                 $resultArray['data'] = $this->xmlWithAttribute($result);
