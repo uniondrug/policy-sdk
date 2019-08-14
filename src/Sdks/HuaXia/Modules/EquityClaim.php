@@ -37,7 +37,7 @@ trait EquityClaim
         $postJson = json_encode($postData, JSON_UNESCAPED_UNICODE);
 
         $this->logger->equityClaim()->info("保司请求报文:" . $postJson);
-        $header[] = 'Content-Type: application/json';
+//        $header[] = 'Content-Type: application/json';
         $header[] = 'MethodName: llylClaim';
         $timeout = 300;
         try {
