@@ -8,6 +8,7 @@ use Uniondrug\PolicySdk\Sdks\RenBaoCar\Modules\CollectInfo;
 use Uniondrug\PolicySdk\Sdks\RenBaoCar\Modules\DefaultQuote;
 use Uniondrug\PolicySdk\Sdks\RenBaoCar\Modules\FreeQuote;
 use Uniondrug\PolicySdk\Sdks\RenBaoCar\Modules\Notify;
+use Uniondrug\PolicySdk\Sdks\RenBaoCar\Modules\PolicyChange;
 use Uniondrug\PolicySdk\Sdks\RenBaoCar\Modules\PolicyPush;
 use Uniondrug\PolicySdk\Sdks\RenBaoCar\Modules\PolicyReading;
 use Uniondrug\PolicySdk\Sdks\RenBaoCar\Modules\SeatFollow;
@@ -65,10 +66,16 @@ class Base extends Sdk
      * 投保单回推
      */
     use PolicyPush;
+
     /*
      * 投保单回推
      */
     use Notify;
+
+    /*
+     * 批改回传
+     */
+    use PolicyChange;
 
     /**
      * 创建唯一流水号
