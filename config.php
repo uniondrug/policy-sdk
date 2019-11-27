@@ -50,4 +50,8 @@ return [
     * 人保车险
     */
     'Sdk:RENBAOCAR' => "RenBaoCar",
+    /*
+     * 苏州国寿理赔
+     */
+    'Sdk:SUNATIONAL' => "SuNational",
 ];
