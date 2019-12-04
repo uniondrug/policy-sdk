@@ -71,7 +71,7 @@ trait FeeUpload
         $postJson = json_encode($info, JSON_UNESCAPED_UNICODE);
         $this->logger->feeUpload()->info("苏州国寿票据上传请求报文:" . $postJson);
         try {
-            $result = $this->curl_https($this->config->requestUrl, $postJson, $header, __FUNCTION__);
+            $result = $this->curl_https($this->config->requestUrl, $postJson, $header, __FUNCTION__,30);
         } catch (\Exception $e) {
             return $this->withError($e->getMessage());
         }

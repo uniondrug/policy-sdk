@@ -53,18 +53,13 @@ trait CaseRevocation
         $postJson = json_encode($info, JSON_UNESCAPED_UNICODE);
         $this->logger->caseRevocation()->info("苏州国寿撤销请求报文:" . $postJson);
         try {
-            $result = $this->curl_https($this->config->requestUrl, $postJson, $header, __FUNCTION__);
+            $result = $this->curl_https($this->config->requestUrl, $postJson, $header, __FUNCTION__,30);
         } catch (\Exception $e) {
             return $this->withError($e->getMessage());
         }
         $this->logger->caseRevocation()->info("国寿撤销响应报文:" . $result);
         $resultArr = json_decode($result);
-        var_dump($resultArr);die;
-        $resultData =$resultArr->result->root->body->FeeSettlementResponse->BusinessProcessStatus;
-        if ($resultData->BusinessStatus!=1) {
-            $msg = $resultData->BusinessMessage;
-            return $this->withError($msg);
-        }
-        return $this->withData(['status'=>$resultData->BusinessStatus,'CntrInfoLst'=>$resultArr->result->root->body->FeeSettlementResponse->CntrInfoLst,'ClaimNo'=>$resultArr->result->root->body->FeeSettlementResponse->ClaimNo]);
+        $resultData =$resultArr->result->root->body->HospitalSettlementCancelResponse;
+        return $this->withData(['result'=>$resultData]);
     }
 }

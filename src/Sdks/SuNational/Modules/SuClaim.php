@@ -63,7 +63,7 @@ trait SuClaim
         $postJson = json_encode($info, JSON_UNESCAPED_UNICODE);
         $this->logger->suClaim()->info("苏州国寿请求报文:" . $postJson);
         try {
-            $result = $this->curl_https($this->config->requestUrl, $postJson, $header, __FUNCTION__);
+            $result = $this->curl_https($this->config->requestUrl, $postJson, $header, __FUNCTION__,30);
         } catch (\Exception $e) {
             return $this->withError($e->getMessage());
         }
