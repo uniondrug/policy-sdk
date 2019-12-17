@@ -53,7 +53,7 @@ trait CaseRevocation
         $postJson = json_encode($info, JSON_UNESCAPED_UNICODE);
         $this->logger->caseRevocation()->info("苏州国寿撤销请求报文:" . $postJson);
         try {
-            $result = $this->curl_https($this->config->requestUrl, $postJson, $header, __FUNCTION__,60,0);
+            $result = $this->curl_https($this->config->requestUrl, $postJson, $header, __FUNCTION__,60,1);
         } catch (\Exception $e) {
             return $this->withError($e->getMessage());
         }
