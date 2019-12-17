@@ -71,7 +71,7 @@ trait CostSettle
         $postJson = json_encode($info, JSON_UNESCAPED_UNICODE);
         $this->logger->costSettle()->info("苏州国寿结算请求报文:" . $postJson);
         try {
-            $result = $this->curl_https($this->config->requestUrl, $postJson, $header, __FUNCTION__,30);
+            $result = $this->curl_https($this->config->requestUrl, $postJson, $header, __FUNCTION__,120,0);
         } catch (\Exception $e) {
             return $this->withError($e->getMessage());
         }
